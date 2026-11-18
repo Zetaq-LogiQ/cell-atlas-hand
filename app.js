@@ -30,33 +30,55 @@ addEventListener('resize', layout); layout();
 // ---------------------------------------------------------------- the cell (Cell Atlas overview model)
 const SEL = new THREE.Color('#6fd6d2');
 const holder = new THREE.Group(); scene.add(holder);                    // the cell lives in here; in AR it is moved, turned and sized in your room
-const M = { root: null, parts: new Map(), sphere: null, meta: null };
+// every model of the Cell Atlas: the whole cell ('overview') and 11 close-up organelles. M = the one on show now.
+let M = { root: null, parts: new Map(), sphere: null, meta: null }, MAN = null;
+const MODELS = {}, gltf = new GLTFLoader(); gltf.setMeshoptDecoder(MeshoptDecoder);
 const isGhost = m => (m.transparent && m.opacity < .75) || (m.transmission || 0) > .3;
-async function load() {
-  const man = await (await fetch('models/atlas_manifest.json')).json(); M.meta = man.models.find(m => m.id === 'overview');
-  const loader = new GLTFLoader(); loader.setMeshoptDecoder(MeshoptDecoder);
-  const g = await loader.loadAsync('models/' + M.meta.file, e => { if (e.total) $('load').textContent = 'Loading the cell… ' + Math.round(e.loaded / e.total * 100) + '%'; });
-  const root = M.root = g.scene, byId = new Map(M.meta.parts.map(p => [p.id, p])), cache = new Map();
+async function prep(id) {
+  if (MODELS[id]) return MODELS[id];
+  const meta = MAN.models.find(m => m.id === id), m = { id, meta, parts: new Map() };
+  const g = await gltf.loadAsync('models/' + meta.file, e => { if (e.total) $('load').textContent = 'Loading ' + meta.name + '… ' + Math.round(e.loaded / e.total * 100) + '%'; });
+  const root = m.root = g.scene, byId = new Map(meta.parts.map(p => [p.id, p])), cache = new Map();
   root.traverse(o => {
     if (!o.isMesh) return;
     let pid = ''; for (let q = o; q; q = q.parent) if (q.userData && q.userData.part !== undefined) { pid = q.userData.part; break; }
-    if (MERGE[pid]) pid = MERGE[pid]; o.userData.pid = pid;
-    const mats = (Array.isArray(o.material) ? o.material : [o.material]).map(m => {
-      if ((m.transmission || 0) > 0) { m.transmission = 0; m.transparent = true; m.opacity = Math.min(m.opacity, .35); m.depthWrite = false; }
-      if (m.transparent && m.opacity < .5 && m.color) { m.opacity *= .6; const h = {}; m.color.getHSL(h); m.color.setHSL(h.h, h.s, h.l * .85); }
-      const k = m.uuid + '|' + pid; if (!cache.has(k)) { const c = m.clone(); c.userData.base = { e: c.emissive ? c.emissive.clone() : null, ei: c.emissiveIntensity ?? 1 }; c.userData.ghost = isGhost(c); cache.set(k, c); }
+    if (id === 'overview' && MERGE[pid]) pid = MERGE[pid]; o.userData.pid = pid;
+    const mats = (Array.isArray(o.material) ? o.material : [o.material]).map(x => {
+      if ((x.transmission || 0) > 0) { x.transmission = 0; x.transparent = true; x.opacity = Math.min(x.opacity, .35); x.depthWrite = false; }
+      if (x.transparent && x.opacity < .5 && x.color) { x.opacity *= .6; const h = {}; x.color.getHSL(h); x.color.setHSL(h.h, h.s, h.l * .85); }
+      const k = x.uuid + '|' + pid; if (!cache.has(k)) { const c = x.clone(); c.userData.base = { e: c.emissive ? c.emissive.clone() : null, ei: c.emissiveIntensity ?? 1 }; c.userData.ghost = isGhost(c); cache.set(k, c); }
       return cache.get(k);
     });
     o.material = Array.isArray(o.material) ? mats : mats[0];
     if (!pid) return;
-    if (!M.parts.has(pid)) M.parts.set(pid, { id: pid, meshes: [], meta: byId.get(pid) });
-    M.parts.get(pid).meshes.push(o);
+    if (!m.parts.has(pid)) m.parts.set(pid, { id: pid, meshes: [], meta: byId.get(pid) });
+    m.parts.get(pid).meshes.push(o);
   });
-  holder.add(root); root.updateMatrixWorld(true);
-  for (const P of M.parts.values()) { const b = new THREE.Box3(); P.meshes.forEach(m => b.expandByObject(m, true)); P.center = b.getCenter(new THREE.Vector3()); P.r = b.getBoundingSphere(new THREE.Sphere()).radius; }
-  M.sphere = new THREE.Box3().setFromObject(root, true).getBoundingSphere(new THREE.Sphere());
-  controls.minDistance = M.sphere.radius * .12; controls.maxDistance = M.sphere.radius * 5;
-  home(true); show('load', false);
+  root.updateMatrixWorld(true);
+  for (const P of m.parts.values()) { const b = new THREE.Box3(); P.meshes.forEach(x => b.expandByObject(x, true)); P.center = b.getCenter(new THREE.Vector3()); }
+  m.sphere = new THREE.Box3().setFromObject(root, true).getBoundingSphere(new THREE.Sphere());
+  return (MODELS[id] = m);
+}
+// put a model on show, in the same place and at the same size as the one before (a quick shrink / grow between them)
+let swapping = false;
+async function showModel(id) {
+  if (swapping || (M.meta && M.meta.id === id)) return; swapping = true; show('load', true);
+  try {
+    const m = await prep(id);
+    if (M.root) { await anim(250, k => holder.scale.setScalar(Math.max(1e-4, hs0 * (1 - k)))); holder.remove(M.root); M.root.position.set(0, 0, 0); }
+    select(null); M = m; holder.add(m.root);
+    controls.minDistance = m.sphere.radius * .12; controls.maxDistance = m.sphere.radius * 5;
+    if (mode === '3d') { holder.scale.setScalar(1); home(true); }
+    else { m.root.position.copy(m.sphere.center).negate(); arScale = AR_S / m.sphere.radius; TG.s = arScale; const s1 = arScale; await anim(300, k => holder.scale.setScalar(Math.max(1e-4, s1 * k))); }
+    show('bBack', id !== 'overview'); $('title').textContent = id === 'overview' ? 'Animal cell' : m.meta.name;
+  } catch (e) { console.warn(e); toast('Could not load that model.'); }
+  show('load', false); swapping = false;
+}
+let hs0 = 1;
+function anim(ms, f) { hs0 = holder.scale.x; return new Promise(r => { const t0 = performance.now(); const step = () => { const k = Math.min(1, (performance.now() - t0) / ms); f(k * k * (3 - 2 * k)); k < 1 ? requestAnimationFrame(step) : r(); }; step(); }); }
+async function load() {
+  MAN = await (await fetch('models/atlas_manifest.json')).json();
+  await showModel('overview');
 }
 const b2g = v => new THREE.Vector3(v[0], v[2], -v[1]);                  // Blender (Z up) -> glTF (Y up)
 function homeView() {
@@ -78,10 +100,18 @@ function stepTween(now) {
 // ---------------------------------------------------------------- picking a part: a name and one line, nothing more
 let selected = null;
 const title = id => TITLE_OVERRIDE[id] || M.parts.get(id)?.meta?.title || id;
+const linkOf = id => M.meta && M.meta.id === 'overview' && MAN.models[0].links ? MAN.models[0].links[id] : null;
+const line = id => BASIC[id]?.job || (M.parts.get(id)?.meta?.description || '').split(/(?<=\.)\s/)[0].slice(0, 110);
 function select(id) {
   selected = id; show('tag', !!id);
-  if (id) { $('tagT').textContent = title(id); $('tagJ').textContent = BASIC[id]?.job || ''; if (mode === '3d') flyTo(M.parts.get(id).center); }
+  if (id) { $('tagT').textContent = title(id); $('tagJ').textContent = line(id); show('bOpen', !!linkOf(id)); if (mode === '3d') flyTo(M.parts.get(id).center); }
   M.root && M.root.traverse(o => { if (!o.isMesh) return; (Array.isArray(o.material) ? o.material : [o.material]).forEach(m => { const b = m.userData.base; if (m.emissive && b.e && !(id && o.userData.pid === id)) { m.emissive.copy(b.e); m.emissiveIntensity = b.ei; } }); });
+}
+function choose(id) {
+  if (!id) return select(null);
+  if (id === selected) { if (linkOf(id)) return showModel(linkOf(id)); return select(null); }
+  select(id);
+  if (linkOf(id) && !SHELL.has(id)) setTimeout(() => { if (selected === id) showModel(linkOf(id)); }, 550);
 }
 function pulse(now) {
   if (!selected) return; const v = .4 + .4 * (.5 + .5 * Math.sin(now / 260));
@@ -117,9 +147,11 @@ canvas.addEventListener('pointerup', e => {
   if (moved > 8 || !quick) return;
   if (mode === 'gyro') return gyroTap(e.clientX, e.clientY);
   const id = pick(e.clientX, e.clientY), now = performance.now();
-  if (id) select(id === selected ? null : id);
+  if (id) choose(id);
   else { if (now - lastTap < 350) home(false); else select(null); lastTap = now; }
 });
+$('bOpen').onclick = e => { e.stopPropagation(); if (selected && linkOf(selected)) showModel(linkOf(selected)); };
+$('bBack').onclick = () => showModel('overview');
 $('tag').onclick = () => select(null);
 
 // ---------------------------------------------------------------- modes: '3d' (screen), 'xr' (Android AR: the cell stays in your room),
@@ -154,7 +186,7 @@ function handFrame(now, _dt, src) {
   $('gl2').textContent = G.ready ? GLABEL[g] + (g === 'fist' ? ` · ${Math.round(G.z)} cm` : '') : G.msg;
   show('cur', live);
   if (!live) { grab = null; prev = 'none'; dwell = 0; return; }
-  const cx = G.tip.x * innerWidth, cy = G.tip.y * innerHeight, c = $('cur');
+  const cx = G.tip.x * innerWidth, cy = G.tip.y * innerHeight - 48, c = $('cur');   // 48 px above the fingertip
   c.style.transform = `translate(${cx}px, ${cy}px)`; c.setAttribute('class', 'g-' + g);
   if (g === 'pinch' && prev !== 'pinch' && !isPlaced()) { placeNow(); prev = g; return; }
   if (g !== prev) { grab = g === 'pinch' ? { x: G.pinchPt.x, y: G.pinchPt.y } : g === 'fist' ? { z: G.z, s: ACT.sizeStart() } : null; tween = null; }
@@ -164,7 +196,7 @@ function handFrame(now, _dt, src) {
   const still = G.tipV < .35;                                             // fingertip speed (screens per second): resting, not passing by
   if ((g === 'point' || g === 'open') && still && isPlaced()) {
     const id = ACT.aim(cx, cy);
-    if (id && id === dwellId) { dwell += dt; if (dwell > DWELL && id !== selected) { select(id); ripple(cx, cy); dwell = -1; } } else { dwellId = id; dwell = 0; }
+    if (id && id === dwellId) { dwell += dt; if (dwell > DWELL && id !== selected) { choose(id); ripple(cx, cy); dwell = -1; } } else { dwellId = id; dwell = 0; }
   } else { dwell = 0; dwellId = null; }
   $('ring').style.strokeDashoffset = 100 - 100 * clamp(dwell / DWELL, 0, 1);
   prev = g;
@@ -177,7 +209,7 @@ function arHolder(at) {                                                  // cent
   M.root.position.copy(M.sphere.center).negate(); arScale = AR_S / M.sphere.radius;
   holder.position.copy(at); holder.scale.setScalar(arScale); holder.rotation.set(0, 0, 0); Object.assign(TG, { ry: 0, rx: 0, s: arScale, on: true });
 }
-function arOff() { TG.on = false; M.root.position.set(0, 0, 0); holder.position.set(0, 0, 0); holder.scale.setScalar(1); holder.rotation.set(0, 0, 0); holder.visible = true; }
+function arOff() { TG.on = false; if (M.root) M.root.position.set(0, 0, 0); M.root.position.set(0, 0, 0); holder.position.set(0, 0, 0); holder.scale.setScalar(1); holder.rotation.set(0, 0, 0); holder.visible = true; }
 
 $('bAR').onclick = async () => {
   const xrOK = navigator.xr && await Promise.race([navigator.xr.isSessionSupported('immersive-ar').catch(() => false), new Promise(r => setTimeout(() => r(false), 2000))]);
@@ -219,7 +251,7 @@ function onXRSelect(e) {
   const r = new THREE.Ray(new THREE.Vector3().setFromMatrixPosition(m4), new THREE.Vector3(0, 0, -1).transformDirection(m4));
   const s = r.at(.5, new THREE.Vector3()).applyMatrix4(Vm.clone().invert()).applyMatrix4(Pm.clone().invert());   // where on the screen the tap was
   const x = (s.x + 1) / 2 * innerWidth, y = (1 - s.y) / 2 * innerHeight, id = pickWith(xrRay, x, y);
-  ripple(x, y); select(id && id !== selected ? id : null);
+  ripple(x, y); choose(id);
 }
 function xrPlace() {
   if (!placed) {
@@ -303,7 +335,7 @@ function gyroTap(x, y) {
     holder.rotation.y = TG.ry = Math.atan2(-at.x, -at.z); holder.visible = true; gPlaced = true; hint('');
     toast('Show your hand to the camera: pinch to turn, fist and pull toward you to zoom, point and hold to pick.'); return;
   }
-  const id = pick(x, y); ripple(x, y); select(id && id !== selected ? id : null);
+  const id = pick(x, y); ripple(x, y); choose(id);
 }
 
 // the small camera view with the hand skeleton: shows what the tracker sees
@@ -339,4 +371,4 @@ renderer.setAnimationLoop((now, frame) => {
   renderer.render(scene, camera); drawPip(src);
 });
 load().catch(e => { console.warn(e); $('load').textContent = 'Could not load the cell model.'; });
-window.__cell = { M, camera, controls, H, select, pick, THREE, holder, get mode() { return mode; }, startGyro, gyroTap };
+window.__cell = { get M() { return M; }, camera, controls, H, select, pick, THREE, holder, get mode() { return mode; }, startGyro, gyroTap };
