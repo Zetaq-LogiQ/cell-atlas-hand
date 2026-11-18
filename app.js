@@ -137,6 +137,7 @@ function handFrame(now, _dt, src) {
   if (!live) { grab = null; prev = 'none'; dwell = 0; return; }
   const cx = G.tip.x * innerWidth, cy = G.tip.y * innerHeight, c = $('cur');
   c.style.transform = `translate(${cx}px, ${cy}px)`; c.setAttribute('class', 'g-' + g);
+  if (g === 'pinch' && prev !== 'pinch' && !isPlaced()) { placeNow(); prev = g; return; }
   if (g !== prev) { grab = g === 'pinch' ? { x: G.pinchPt.x, y: G.pinchPt.y } : g === 'fist' ? { z: G.z, s: ACT.sizeStart() } : null; tween = null; }
   if (g === 'pinch' && grab) { const dx = G.pinchPt.x - grab.x, dy = G.pinchPt.y - grab.y; grab.x = G.pinchPt.x; grab.y = G.pinchPt.y; ACT.turn(dx, dy); }
   // zoom: close your hand and pull it toward you = bigger / closer (the front camera sees the hand move away, the back camera sees it come nearer)
@@ -148,12 +149,6 @@ function handFrame(now, _dt, src) {
   $('ring').style.strokeDashoffset = 100 - 100 * clamp(dwell / .7, 0, 1);
   prev = g;
 }
-$('bHand').onclick = async () => {
-  if (handOn) { H.stop(); handOn = false; $('bHand').textContent = 'Use my hand'; show('pip', false); show('cur', false); return; }
-  try { await H.start('user'); } catch (e) { console.warn(e); return toast('Could not open the camera. Allow camera access and try again.'); }
-  H.G.map = null; handOn = true; $('bHand').textContent = 'Stop hand'; show('pip', true);
-  toast('Pinch and move to turn. Make a fist and pull toward you to zoom in. Point and hold to pick a part.');
-};
 
 // ---------------------------------------------------------------- AR: place the cell in your room
 const AR_S = .3 / 2;                                                      // in AR the cell is 30 cm across to start (scale is set from its radius)
@@ -166,13 +161,12 @@ function arOff() { M.root.position.set(0, 0, 0); holder.position.set(0, 0, 0); h
 ACT.size = (s0, k) => { if (mode === '3d') setDist(s0 / k); else holder.scale.setScalar(clamp(s0 * k, arScale * .35, arScale * 5)); };
 
 $('bAR').onclick = async () => {
-  if (handOn) $('bHand').click();
   const xrOK = navigator.xr && await Promise.race([navigator.xr.isSessionSupported('immersive-ar').catch(() => false), new Promise(r => setTimeout(() => r(false), 2000))]);
   return xrOK ? startXR() : startGyro();
 };
 $('bExit').onclick = () => mode === 'xr' ? renderer.xr.getSession()?.end() : stopGyro();
 function uiAR(on) {
-  show('bAR', !on); show('bHand', !on); show('bExit', on); show('title', !on); document.body.classList.toggle('ar', on);
+  show('bAR', !on); show('bExit', on); show('title', !on); document.body.classList.toggle('ar', on);
   controls.enabled = !on; select(null);
 }
 
@@ -189,26 +183,34 @@ async function startXR() {
     camOK = !!(session.enabledFeatures && session.enabledFeatures.includes('camera-access')); glBind = null; camFB = null;
     session.addEventListener('end', endXR); session.addEventListener('select', onXRSelect);
     mode = 'xr'; placed = false; holder.visible = false; uiAR(true); document.body.style.background = 'transparent';
-    hint('Move the phone slowly over the floor or a table. When the yellow ring appears, tap to place the cell.');
-    if (camOK) { H.load(); H.G.map = p => ({ x: p.x, y: p.y }); show('pip', true); } else $('gl2').textContent = 'Hand needs a newer Chrome: tap to pick';
+    hint('Move the phone slowly over the floor or a table. When the yellow ring appears, tap or pinch to place the cell.');
+    if (camOK) { H.load(); H.G.map = p => ({ x: p.x, y: p.y }); show('pip', true); }
+    else { toast('This phone AR cannot share the camera with hand tracking: using camera mode instead.'); fallback = true; session.end(); }
   } catch (e) { console.warn(e); toast('Could not start AR on this phone.'); }
 }
-function endXR() { hitSrc = null; mode = '3d'; placed = false; reticle.visible = false; arOff(); uiAR(false); hint(''); show('pip', false); show('cur', false); document.body.style.background = ''; home(true); layout(); }
+let fallback = false;
+function endXR() { if (fallback) { fallback = false; hitSrc = null; mode = '3d'; placed = false; reticle.visible = false; arOff(); uiAR(false); hint(''); return startGyro(); }
+  hitSrc = null; mode = '3d'; placed = false; reticle.visible = false; arOff(); uiAR(false); hint(''); show('pip', false); show('cur', false); document.body.style.background = ''; home(true); layout(); }
 $('ui').addEventListener('beforexrselect', e => { if (e.target.closest('button, #tag')) e.preventDefault(); });
 const m4 = new THREE.Matrix4();
 function onXRSelect(e) {
-  if (!placed) {
-    if (!reticle.visible) return;
-    const p = new THREE.Vector3().setFromMatrixPosition(reticle.matrix).add(new THREE.Vector3(0, .25, 0));   // floats 25 cm above the spot
-    arHolder(p); const c = renderer.xr.getCamera().position; holder.rotation.y = Math.atan2(c.x - p.x, c.z - p.z);
-    holder.visible = true; placed = true; reticle.visible = false; hint('');
-    toast(camOK ? 'Walk around it. Hold the phone in one hand and show your other hand to the camera.' : 'Walk around it. Tap a part to name it.'); return;
-  }
+  if (!placed) { xrPlace(); return; }
   const pose = e.frame && e.frame.getPose(e.inputSource.targetRaySpace, renderer.xr.getReferenceSpace()); if (!pose) return;
   m4.fromArray(pose.transform.matrix);
   const id = pickRay(new THREE.Ray(new THREE.Vector3().setFromMatrixPosition(m4), new THREE.Vector3(0, 0, -1).transformDirection(m4)));
   select(id && id !== selected ? id : null);
 }
+function xrPlace() {
+  if (!placed) {
+    if (!reticle.visible) return;
+    const p = new THREE.Vector3().setFromMatrixPosition(reticle.matrix).add(new THREE.Vector3(0, .25, 0));   // floats 25 cm above the spot
+    arHolder(p); const c = renderer.xr.getCamera().position; holder.rotation.y = Math.atan2(c.x - p.x, c.z - p.z);
+    holder.visible = true; placed = true; reticle.visible = false; hint('');
+    toast('Walk around it. Hold the phone in one hand and show your other hand to the camera.');
+  }
+}
+const isPlaced = () => mode === 'xr' ? placed : gPlaced;
+function placeNow() { if (mode === 'xr') xrPlace(); else if (mode === 'gyro') gyroTap(innerWidth / 2, innerHeight / 2); }
 // the AR camera picture (a GPU texture) -> a small canvas for the hand tracker, about 12 times a second
 const gl = renderer.getContext(); let camProg = null, camBuf = null, camPix = null, camCv = null, camCtx = null, camW = 0, camH = 0, camT = 0;
 function camSetup(w, h) {
@@ -259,7 +261,7 @@ async function startGyro() {
   mode = 'gyro'; gPlaced = false; holder.visible = false; uiAR(true); show('vid', true); show('pip', true); document.body.style.background = '#000';
   H.G.map = p => { const W = innerWidth, Hh = innerHeight, vw = vid.videoWidth, vh = vid.videoHeight, s = Math.max(W / vw, Hh / vh); return { x: ((W - vw * s) / 2 + p.x * vw * s) / W, y: ((Hh - vh * s) / 2 + p.y * vh * s) / Hh }; };
   camera.position.set(0, 0, 0); camera.near = .02; camera.far = 50;
-  hint('Point the phone where you want the cell, then tap.');
+  hint('Point the phone where you want the cell, then tap or pinch.');
 }
 function stopGyro() {
   removeEventListener('deviceorientation', onOri); ori = null; try { sensor && sensor.stop(); } catch (e) { } sensor = sensQ = null;
@@ -308,9 +310,8 @@ renderer.setAnimationLoop((now, frame) => {
   if (mode === 'xr' && frame) {
     if (hitSrc && !placed) { const res = frame.getHitTestResults(hitSrc), pose = res.length && res[0].getPose(renderer.xr.getReferenceSpace()); reticle.visible = !!pose; if (pose) reticle.matrix.fromArray(pose.transform.matrix); }
     const cv = xrCamera(now, frame); src = camCv;
-    if (cv && placed) handFrame(now, dt, cv); else if (!placed) show('cur', false);
-  } else if (mode === 'gyro') { gyroFrame(); if (gPlaced) handFrame(now, dt, vid); }
-  else if (handOn) handFrame(now, dt, vid);
+    if (cv) handFrame(now, dt, cv);
+  } else if (mode === 'gyro') { gyroFrame(); handFrame(now, dt, vid); }
   if (mode === '3d') { stepTween(now); controls.update(); }
   pulse(now);
   renderer.render(scene, camera); drawPip(src);
