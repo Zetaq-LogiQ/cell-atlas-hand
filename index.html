@@ -14,6 +14,11 @@
   #tag { position: fixed; left: 50%; bottom: calc(max(16px, env(safe-area-inset-bottom)) + 64px); transform: translateX(-50%); background: rgba(10, 18, 30, .78); backdrop-filter: blur(8px);
     border: 1px solid rgba(111, 214, 210, .55); border-radius: 14px; padding: 8px 14px; text-align: center; max-width: calc(100vw - 40px); cursor: pointer; }
   #tagT { font-size: 16px; font-weight: 650; } #tagJ { font-size: 13px; opacity: .8; margin-top: 2px; }
+  #vid { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  #ui { position: fixed; inset: 0; pointer-events: none; } #ui > * { pointer-events: auto; } #ui > #title, #ui > #toast, #ui > #cur, #ui > #hint, #ui > #load { pointer-events: none; }
+  #hint { position: fixed; left: 50%; top: 45%; transform: translate(-50%, -50%); background: rgba(10, 18, 30, .75); padding: 10px 14px; border-radius: 14px; font-size: 14px; text-align: center; max-width: calc(100vw - 64px); }
+  #bar { display: flex; gap: 8px; width: max-content; max-width: calc(100vw - 24px); flex-wrap: wrap; justify-content: center; }
+  #bar button.soft, #bExit { background: rgba(10, 18, 30, .7) !important; color: #eaf3ff !important; }
   #bar { position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%); }
   #bar button { border: 0; border-radius: 999px; padding: 12px 20px; min-height: 46px; background: #ffd36b; color: #1d1606; font: 650 14px "Segoe UI", system-ui, sans-serif; cursor: pointer; }
   #pip { position: fixed; right: 12px; top: max(12px, env(safe-area-inset-top)); width: 150px; border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 4px 16px rgba(0, 0, 0, .4); }
@@ -27,16 +32,19 @@
 </style>
 </head>
 <body>
-<video id="vid" playsinline muted autoplay style="display:none"></video>
+<video id="vid" class="hide" playsinline muted autoplay></video>
 <canvas id="gl"></canvas>
+<div id="ui">
 <div id="title">Animal cell</div>
+<div id="hint" class="hide"></div>
 <div id="load">Loading the cell…</div>
 <div id="tag" class="hide"><div id="tagT"></div><div id="tagJ"></div></div>
 <svg id="cur" class="hide" viewBox="0 0 42 42"><circle id="ring" cx="21" cy="21" r="16" pathLength="100"/><circle class="dot" cx="21" cy="21" r="7"/></svg>
 <div id="pip" class="hide"><canvas id="pipc" width="300" height="226"></canvas><div id="gl2">Loading…</div></div>
 <div id="toast"></div>
-<div id="bar"><button id="bHand">Use my hand</button></div>
+<div id="bar"><button id="bAR">See it in my room</button><button id="bHand" class="soft">Use my hand</button><button id="bExit" class="hide">Exit</button></div>
+</div>
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
-<script type="module" src="./app.js?v=1"></script>
+<script type="module" src="./app.js?v=3"></script>
 </body>
 </html>

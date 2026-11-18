@@ -9,13 +9,14 @@ const MP = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14';
 const MODEL = 'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task';
 
 export function createGestures(video) {
-  const G = { on: false, ready: false, lm: null, wl: null, gesture: 'none', raw: 'none', same: 0, seen: 0, z: 0, tip: null, pinchPt: null, msg: '', cpu: false };
+  const G = { mirror: true, map: null, on: false, ready: false, lm: null, wl: null, gesture: 'none', raw: 'none', same: 0, seen: 0, z: 0, tip: null, pinchPt: null, msg: '', cpu: false };
   let hl = null, lastT = 0, err = 0;
 
-  async function start() {
-    const st = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: { ideal: 960 }, height: { ideal: 540 } }, audio: false });
+  async function start(facing = 'user') {
+    G.mirror = facing === 'user';
+    const st = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: facing }, width: { ideal: 1280 }, height: { ideal: 720 } }, audio: false });
     video.srcObject = st; await video.play(); G.on = true;
-    if (!hl) await load();
+    if (!hl) load();                                                      // the camera shows at once; hand tracking arrives a moment later
   }
   function stop() { const st = video.srcObject; st && st.getTracks().forEach(t => t.stop()); video.srcObject = null; G.on = false; G.lm = null; G.gesture = 'none'; }
   async function load() {
@@ -41,8 +42,8 @@ export function createGestures(video) {
     return 'open';
   }
   // hand distance (cm) from the camera: fit the hand's own 3D shape to where its points are in the picture
-  function depth(lm, wl) {
-    const W = video.videoWidth || 960, H = video.videoHeight || 540, f = W / 2 / Math.tan(31 * Math.PI / 180), cx = W / 2, cy = H / 2;
+  function depth(lm, wl, W, H) {
+    const f = W / 2 / Math.tan(31 * Math.PI / 180), cx = W / 2, cy = H / 2;
     const A = [[0, 0, 0], [0, 0, 0], [0, 0, 0]], b = [0, 0, 0];
     const add = (r, v) => { for (let i = 0; i < 3; i++) { b[i] += r[i] * v; for (let j = 0; j < 3; j++) A[i][j] += r[i] * r[j]; } };
     for (let i = 0; i < 21; i++) { const u = lm[i].x * W - cx, v = lm[i].y * H - cy; add([f, 0, -u], u * wl[i].z - f * wl[i].x); add([0, f, -v], v * wl[i].z - f * wl[i].y); }
@@ -52,22 +53,25 @@ export function createGestures(video) {
   }
 
   // about 25 looks a second
-  function step(now) {
-    if (!hl || !G.on || video.readyState < 2 || now - lastT < 38) return false;
+  // src: the <video>, or a canvas holding the AR camera picture
+  function step(now, src = video) {
+    const W = src.videoWidth || src.width, H = src.videoHeight || src.height;
+    if (!hl || (src === video && (!G.on || video.readyState < 2)) || now - lastT < 38) return false;
     lastT = now;
-    let r; try { r = hl.detectForVideo(video, now); err = 0; } catch (e) { if (++err > 5) G.msg = 'Hand tracking error'; return false; }
+    let r; try { r = hl.detectForVideo(src, now); err = 0; } catch (e) { if (++err > 5) G.msg = 'Hand tracking error'; return false; }
     const lm = r.landmarks && r.landmarks[0], wl = r.worldLandmarks && r.worldLandmarks[0];
     if (!lm || !wl) { if (now - G.seen > 250) { G.lm = null; G.gesture = 'none'; G.tip = null; } return true; }
     G.seen = now; G.lm = lm; G.wl = wl;
     const raw = classify(wl);                                             // a gesture counts once it is seen twice in a row (no flicker)
     G.same = raw === G.raw ? G.same + 1 : 0; G.raw = raw; if (G.same >= 1 || G.gesture === 'none') G.gesture = raw;
-    const z = depth(lm, wl); if (z > 5) G.z = G.z ? G.z + (z - G.z) * .45 : z;
+    const z = depth(lm, wl, W, H); if (z > 5) G.z = G.z ? G.z + (z - G.z) * .45 : z;
     // the picture is shown mirrored (like a mirror), so x is flipped; the middle 70 % of the picture covers the whole screen
-    const map = p => ({ x: Math.min(1, Math.max(0, (1 - p.x - .15) / .7)), y: Math.min(1, Math.max(0, (p.y - .12) / .7)) });
+    // (in AR the app sets G.map: the fingertip dot then sits exactly on your real fingertip)
+    const map = G.map || (p => ({ x: Math.min(1, Math.max(0, (1 - p.x - .15) / .7)), y: Math.min(1, Math.max(0, (p.y - .12) / .7)) }));
     const tip = map(lm[8]), pp = map({ x: (lm[4].x + lm[8].x) / 2, y: (lm[4].y + lm[8].y) / 2 });
     G.tip = G.tip ? { x: G.tip.x + (tip.x - G.tip.x) * .5, y: G.tip.y + (tip.y - G.tip.y) * .5 } : tip;
     G.pinchPt = G.pinchPt ? { x: G.pinchPt.x + (pp.x - G.pinchPt.x) * .5, y: G.pinchPt.y + (pp.y - G.pinchPt.y) * .5 } : pp;
     return true;
   }
-  return { G, start, stop, step };
+  return { G, start, stop, step, load: () => hl ? null : load() };
 }
