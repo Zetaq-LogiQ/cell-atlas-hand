@@ -64,11 +64,14 @@ export function createGestures(video) {
     G.seen = now; G.lm = lm; G.wl = wl;
     const raw = classify(wl);                                             // a gesture counts once it is seen twice in a row (no flicker)
     G.same = raw === G.raw ? G.same + 1 : 0; G.raw = raw; if (G.same >= 1 || G.gesture === 'none') G.gesture = raw;
-    const z = depth(lm, wl, W, H); if (z > 5) G.z = G.z ? G.z + (z - G.z) * .45 : z;
+    // depth is the noisiest number: small changes are smoothed hard (jitter), big ones followed fast (a real pull)
+    const z = depth(lm, wl, W, H); if (z > 5) { if (!G.z) G.z = z; else { const d = Math.abs(z - G.z); G.z += (z - G.z) * (d < 1.5 ? .12 : d < 4 ? .3 : .55); } }
     // the picture is shown mirrored (like a mirror), so x is flipped; the middle 70 % of the picture covers the whole screen
     // (in AR the app sets G.map: the fingertip dot then sits exactly on your real fingertip)
     const map = G.map || (p => ({ x: Math.min(1, Math.max(0, (1 - p.x - .15) / .7)), y: Math.min(1, Math.max(0, (p.y - .12) / .7)) }));
     const tip = map(lm[8]), pp = map({ x: (lm[4].x + lm[8].x) / 2, y: (lm[4].y + lm[8].y) / 2 });
+    const dtS = Math.max(.01, (now - (G.tT || now - 40)) / 1000); G.tT = now;
+    G.tipV = G.tip ? Math.hypot(tip.x - G.tip.x, tip.y - G.tip.y) / dtS : 0;
     G.tip = G.tip ? { x: G.tip.x + (tip.x - G.tip.x) * .5, y: G.tip.y + (tip.y - G.tip.y) * .5 } : tip;
     G.pinchPt = G.pinchPt ? { x: G.pinchPt.x + (pp.x - G.pinchPt.x) * .5, y: G.pinchPt.y + (pp.y - G.pinchPt.y) * .5 } : pp;
     return true;

@@ -88,13 +88,25 @@ function pulse(now) {
   for (const o of M.parts.get(selected).meshes) (Array.isArray(o.material) ? o.material : [o.material]).forEach(m => { if (m.emissive) { m.emissive.copy(SEL); m.emissiveIntensity = v; } });
 }
 const ray = new THREE.Raycaster();
-function pick(x, y) { ray.setFromCamera(new THREE.Vector2(x / innerWidth * 2 - 1, -y / innerHeight * 2 + 1), camera); return pickRay(ray.ray); }
-function pickRay(r) {
-  if (!M.root) return null; ray.ray.copy(r);
+// a tap or a fingertip picks the first solid part under it; if it lands between parts, a ring of nearby points (a fingertip wide)
+// is tried. The see-through outer shells (membrane, cytoplasm) only count when nothing else is there.
+const SHELL = new Set(['plasma_cell_membrane', 'cytoplasm_cytosol']);
+const RING = Array.from({ length: 8 }, (_, i) => [Math.cos(i * Math.PI / 4), Math.sin(i * Math.PI / 4)]);
+function hitOf(r) {
+  ray.ray.copy(r);
   const hits = ray.intersectObject(M.root, true).filter(h => h.object.userData.pid && h.object.visible);
-  const solid = h => { const m = Array.isArray(h.object.material) ? h.object.material[0] : h.object.material; return !m.userData.ghost && m.opacity > .5; };
-  const h = hits.find(solid) || hits[0]; return h ? h.object.userData.pid : null;
+  const solid = h => { const m = Array.isArray(h.object.material) ? h.object.material[0] : h.object.material; return !m.userData.ghost && m.opacity > .5 && !SHELL.has(h.object.userData.pid); };
+  const h = hits.find(solid); return { part: h ? h.object.userData.pid : null, shell: hits.length ? hits[0].object.userData.pid : null };
 }
+function pickWith(rayAt, x, y) {
+  if (!M.root) return null;
+  const h0 = hitOf(rayAt(x, y)); if (h0.part) return h0.part; let shell = h0.shell;
+  for (const rad of [14, 26]) for (const [a, b] of RING) { const h = hitOf(rayAt(x + a * rad, y + b * rad)); if (h.part) return h.part; shell = shell || h.shell; }
+  return shell;
+}
+const camRay = (x, y) => { ray.setFromCamera(new THREE.Vector2(x / innerWidth * 2 - 1, -y / innerHeight * 2 + 1), camera); return ray.ray.clone(); };
+function pick(x, y) { return pickWith(camRay, x, y); }
+function pickRay(r) { if (!M.root) return null; const h = hitOf(r); return h.part || h.shell; }
 
 // ---------------------------------------------------------------- touch: tap = pick, double-tap empty = reset (turning and zoom are OrbitControls)
 let down = null, lastTap = 0;
@@ -120,13 +132,20 @@ function hint(s) { $('hint').textContent = s || ''; show('hint', !!s); }
 const sph = new THREE.Spherical();
 function orbitBy(dTheta, dPhi) { const off = camera.position.clone().sub(controls.target); sph.setFromVector3(off); sph.theta += dTheta; sph.phi = clamp(sph.phi + dPhi, .15, Math.PI - .15); off.setFromSpherical(sph); camera.position.copy(controls.target).add(off); }
 function setDist(d) { const off = camera.position.clone().sub(controls.target); off.setLength(clamp(d, controls.minDistance, controls.maxDistance)); camera.position.copy(controls.target).add(off); }
+const TG = { ry: 0, rx: 0, s: 1, on: false };                             // where the hand wants the cell to be
 const ACT = {
-  turn(dx, dy) { if (mode === '3d') orbitBy(-dx * 5.5, -dy * 4); else { holder.rotation.y += dx * 5.5; holder.rotation.x = clamp(holder.rotation.x + dy * 4, -1.3, 1.3); } },
-  sizeStart() { return mode === '3d' ? camera.position.distanceTo(controls.target) : holder.scale.x; },
-  size(s0, k) { if (mode === '3d') setDist(s0 / k); else holder.scale.setScalar(clamp(s0 * k, AR_S * .35, AR_S * 5)); },
-  aim(x, y) { return mode === 'xr' ? pickRay(xrRay(x, y)) : pick(x, y); }
+  turn(dx, dy) { if (mode === '3d') orbitBy(-dx * 5.5, -dy * 4); else { TG.ry += dx * 5.5; TG.rx = clamp(TG.rx + dy * 4, -1.3, 1.3); } },
+  sizeStart() { return mode === '3d' ? camera.position.distanceTo(controls.target) : TG.s; },
+  size(s0, k) { if (mode === '3d') setDist(s0 / k); else TG.s = clamp(s0 * k, arScale * .35, arScale * 5); },
+  aim(x, y) { return mode === 'xr' ? pickWith(xrRay, x, y) : pick(x, y); }
 };
+function glide(dt) {
+  if (mode === '3d' || !TG.on) return; const k = 1 - Math.exp(-dt * 10);
+  holder.rotation.y += (TG.ry - holder.rotation.y) * k; holder.rotation.x += (TG.rx - holder.rotation.x) * k;
+  holder.scale.setScalar(Math.exp(Math.log(holder.scale.x) + (Math.log(TG.s) - Math.log(holder.scale.x)) * k));   // size glides evenly
+}
 
+const DWELL = .55;
 let handOn = false, prev = 'none', grab = null, dwell = 0, dwellId = null, hfLast = 0;
 const GLABEL = { open: 'Open hand', point: 'Pointing', pinch: 'Pinch: turning', fist: 'Fist: zoom', none: 'No hand' };
 function handFrame(now, _dt, src) {
@@ -141,12 +160,13 @@ function handFrame(now, _dt, src) {
   if (g !== prev) { grab = g === 'pinch' ? { x: G.pinchPt.x, y: G.pinchPt.y } : g === 'fist' ? { z: G.z, s: ACT.sizeStart() } : null; tween = null; }
   if (g === 'pinch' && grab) { const dx = G.pinchPt.x - grab.x, dy = G.pinchPt.y - grab.y; grab.x = G.pinchPt.x; grab.y = G.pinchPt.y; ACT.turn(dx, dy); }
   // zoom: close your hand and pull it toward you = bigger / closer (the front camera sees the hand move away, the back camera sees it come nearer)
-  else if (g === 'fist' && grab && G.z > 5) { const r = grab.z / G.z; ACT.size(grab.s, Math.pow(G.mirror ? 1 / r : r, 3)); }
-  if (g === 'point' && (mode !== 'xr' || placed) && (mode !== 'gyro' || gPlaced)) {
+  else if (g === 'fist' && grab && G.z > 5) { const r = grab.z / G.z; ACT.size(grab.s, Math.pow(G.mirror ? 1 / r : r, 2.2)); }
+  const still = G.tipV < .35;                                             // fingertip speed (screens per second): resting, not passing by
+  if ((g === 'point' || g === 'open') && still && isPlaced()) {
     const id = ACT.aim(cx, cy);
-    if (id && id === dwellId) { dwell += dt; if (dwell > .7 && id !== selected) { select(id); dwell = -1; } } else { dwellId = id; dwell = 0; }
+    if (id && id === dwellId) { dwell += dt; if (dwell > DWELL && id !== selected) { select(id); ripple(cx, cy); dwell = -1; } } else { dwellId = id; dwell = 0; }
   } else { dwell = 0; dwellId = null; }
-  $('ring').style.strokeDashoffset = 100 - 100 * clamp(dwell / .7, 0, 1);
+  $('ring').style.strokeDashoffset = 100 - 100 * clamp(dwell / DWELL, 0, 1);
   prev = g;
 }
 
@@ -155,10 +175,9 @@ const AR_S = .3 / 2;                                                      // in 
 let arScale = 1;
 function arHolder(at) {                                                  // centre the cell on 'at', 30 cm across, facing you
   M.root.position.copy(M.sphere.center).negate(); arScale = AR_S / M.sphere.radius;
-  holder.position.copy(at); holder.scale.setScalar(arScale); holder.rotation.set(0, 0, 0);
+  holder.position.copy(at); holder.scale.setScalar(arScale); holder.rotation.set(0, 0, 0); Object.assign(TG, { ry: 0, rx: 0, s: arScale, on: true });
 }
-function arOff() { M.root.position.set(0, 0, 0); holder.position.set(0, 0, 0); holder.scale.setScalar(1); holder.rotation.set(0, 0, 0); holder.visible = true; }
-ACT.size = (s0, k) => { if (mode === '3d') setDist(s0 / k); else holder.scale.setScalar(clamp(s0 * k, arScale * .35, arScale * 5)); };
+function arOff() { TG.on = false; M.root.position.set(0, 0, 0); holder.position.set(0, 0, 0); holder.scale.setScalar(1); holder.rotation.set(0, 0, 0); holder.visible = true; }
 
 $('bAR').onclick = async () => {
   const xrOK = navigator.xr && await Promise.race([navigator.xr.isSessionSupported('immersive-ar').catch(() => false), new Promise(r => setTimeout(() => r(false), 2000))]);
@@ -197,14 +216,16 @@ function onXRSelect(e) {
   if (!placed) { xrPlace(); return; }
   const pose = e.frame && e.frame.getPose(e.inputSource.targetRaySpace, renderer.xr.getReferenceSpace()); if (!pose) return;
   m4.fromArray(pose.transform.matrix);
-  const id = pickRay(new THREE.Ray(new THREE.Vector3().setFromMatrixPosition(m4), new THREE.Vector3(0, 0, -1).transformDirection(m4)));
-  select(id && id !== selected ? id : null);
+  const r = new THREE.Ray(new THREE.Vector3().setFromMatrixPosition(m4), new THREE.Vector3(0, 0, -1).transformDirection(m4));
+  const s = r.at(.5, new THREE.Vector3()).applyMatrix4(Vm.clone().invert()).applyMatrix4(Pm.clone().invert());   // where on the screen the tap was
+  const x = (s.x + 1) / 2 * innerWidth, y = (1 - s.y) / 2 * innerHeight, id = pickWith(xrRay, x, y);
+  ripple(x, y); select(id && id !== selected ? id : null);
 }
 function xrPlace() {
   if (!placed) {
     if (!reticle.visible) return;
     const p = new THREE.Vector3().setFromMatrixPosition(reticle.matrix).add(new THREE.Vector3(0, .25, 0));   // floats 25 cm above the spot
-    arHolder(p); const c = renderer.xr.getCamera().position; holder.rotation.y = Math.atan2(c.x - p.x, c.z - p.z);
+    arHolder(p); const c = renderer.xr.getCamera().position; holder.rotation.y = TG.ry = Math.atan2(c.x - p.x, c.z - p.z);
     holder.visible = true; placed = true; reticle.visible = false; hint('');
     toast('Walk around it. Hold the phone in one hand and show your other hand to the camera.');
   }
@@ -279,10 +300,10 @@ function gyroFrame() {
 function gyroTap(x, y) {
   if (!gPlaced) {                                                        // the cell floats 60 cm ahead, where the screen's middle points
     const at = new THREE.Vector3(0, 0, -.6).applyQuaternion(camera.quaternion); arHolder(at);
-    holder.rotation.y = Math.atan2(-at.x, -at.z); holder.visible = true; gPlaced = true; hint('');
+    holder.rotation.y = TG.ry = Math.atan2(-at.x, -at.z); holder.visible = true; gPlaced = true; hint('');
     toast('Show your hand to the camera: pinch to turn, fist and pull toward you to zoom, point and hold to pick.'); return;
   }
-  const id = pick(x, y); select(id && id !== selected ? id : null);
+  const id = pick(x, y); ripple(x, y); select(id && id !== selected ? id : null);
 }
 
 // the small camera view with the hand skeleton: shows what the tracker sees
@@ -299,6 +320,7 @@ function drawPip(src) {
   p2.fillStyle = col; for (const q of P) { p2.beginPath(); p2.arc(q[0], q[1], 2.6, 0, 7); p2.fill(); }
 }
 
+function ripple(x, y) { const r = document.createElement('div'); r.className = 'rip'; r.style.left = x + 'px'; r.style.top = y + 'px'; $('ui').appendChild(r); setTimeout(() => r.remove(), 600); }
 let toastT = 0;
 function toast(m) { const t = $('toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 4200); }
 
@@ -313,7 +335,7 @@ renderer.setAnimationLoop((now, frame) => {
     if (cv) handFrame(now, dt, cv);
   } else if (mode === 'gyro') { gyroFrame(); handFrame(now, dt, vid); }
   if (mode === '3d') { stepTween(now); controls.update(); }
-  pulse(now);
+  glide(dt); pulse(now);
   renderer.render(scene, camera); drawPip(src);
 });
 load().catch(e => { console.warn(e); $('load').textContent = 'Could not load the cell model.'; });

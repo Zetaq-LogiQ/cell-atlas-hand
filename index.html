@@ -28,6 +28,8 @@
   #ring { fill: none; stroke: #6fe0ff; stroke-width: 3; stroke-dasharray: 100; stroke-dashoffset: 100; transform: rotate(-90deg); transform-origin: 21px 21px; }
   #toast { position: fixed; left: 50%; top: 50px; transform: translateX(-50%); background: rgba(255, 224, 130, .96); color: #1d1606; padding: 8px 13px; border-radius: 12px; font-size: 13.5px; opacity: 0; transition: opacity .3s; max-width: calc(100vw - 40px); text-align: center; pointer-events: none; }
   #toast.show { opacity: 1; }
+  .rip { position: fixed; width: 44px; height: 44px; margin: -22px 0 0 -22px; border: 3px solid #6fd6d2; border-radius: 50%; pointer-events: none; animation: rip .6s ease-out forwards; }
+  @keyframes rip { from { transform: scale(.4); opacity: 1; } to { transform: scale(1.4); opacity: 0; } }
   .hide { display: none !important; }
 </style>
 </head>
@@ -45,6 +47,6 @@
 <div id="bar"><button id="bAR">See it in my room</button><button id="bExit" class="hide">Exit</button></div>
 </div>
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
-<script type="module" src="./app.js?v=4"></script>
+<script type="module" src="./app.js?v=5"></script>
 </body>
 </html>
