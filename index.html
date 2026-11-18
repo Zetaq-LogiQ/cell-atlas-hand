@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cell Atlas Hand</title>
+<link rel="icon" href="data:,">
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; font-family: "Segoe UI", system-ui, sans-serif; color: #eaf3ff; }
+  body { background: radial-gradient(ellipse at 50% 40%, #1f3550 0%, #0d1622 70%); }
+  #gl { position: fixed; inset: 0; width: 100%; height: 100%; touch-action: none; display: block; }
+  #title { position: fixed; left: 14px; top: max(12px, env(safe-area-inset-top)); font-size: 15px; font-weight: 650; opacity: .85; pointer-events: none; }
+  #load { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 14px; opacity: .8; }
+  #tag { position: fixed; left: 50%; bottom: calc(max(16px, env(safe-area-inset-bottom)) + 64px); transform: translateX(-50%); background: rgba(10, 18, 30, .78); backdrop-filter: blur(8px);
+    border: 1px solid rgba(111, 214, 210, .55); border-radius: 14px; padding: 8px 14px; text-align: center; max-width: calc(100vw - 40px); cursor: pointer; }
+  #tagT { font-size: 16px; font-weight: 650; } #tagJ { font-size: 13px; opacity: .8; margin-top: 2px; }
+  #bar { position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%); }
+  #bar button { border: 0; border-radius: 999px; padding: 12px 20px; min-height: 46px; background: #ffd36b; color: #1d1606; font: 650 14px "Segoe UI", system-ui, sans-serif; cursor: pointer; }
+  #pip { position: fixed; right: 12px; top: max(12px, env(safe-area-inset-top)); width: 150px; border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 4px 16px rgba(0, 0, 0, .4); }
+  #pipc { display: block; width: 150px; height: 113px; } #gl2 { font-size: 11.5px; padding: 4px 8px; background: rgba(0, 0, 0, .6); text-align: center; }
+  #cur { position: fixed; left: -21px; top: -21px; width: 42px; height: 42px; pointer-events: none; transition: opacity .2s; }
+  #cur circle.dot { fill: rgba(255, 255, 255, .85); } #cur.g-point circle.dot { fill: #6fe0ff; } #cur.g-pinch circle.dot { fill: #ffd36b; } #cur.g-fist circle.dot { fill: #ff8a6b; }
+  #ring { fill: none; stroke: #6fe0ff; stroke-width: 3; stroke-dasharray: 100; stroke-dashoffset: 100; transform: rotate(-90deg); transform-origin: 21px 21px; }
+  #toast { position: fixed; left: 50%; top: 50px; transform: translateX(-50%); background: rgba(255, 224, 130, .96); color: #1d1606; padding: 8px 13px; border-radius: 12px; font-size: 13.5px; opacity: 0; transition: opacity .3s; max-width: calc(100vw - 40px); text-align: center; pointer-events: none; }
+  #toast.show { opacity: 1; }
+  .hide { display: none !important; }
+</style>
+</head>
+<body>
+<video id="vid" playsinline muted autoplay style="display:none"></video>
+<canvas id="gl"></canvas>
+<div id="title">Animal cell</div>
+<div id="load">Loading the cell…</div>
+<div id="tag" class="hide"><div id="tagT"></div><div id="tagJ"></div></div>
+<svg id="cur" class="hide" viewBox="0 0 42 42"><circle id="ring" cx="21" cy="21" r="16" pathLength="100"/><circle class="dot" cx="21" cy="21" r="7"/></svg>
+<div id="pip" class="hide"><canvas id="pipc" width="300" height="226"></canvas><div id="gl2">Loading…</div></div>
+<div id="toast"></div>
+<div id="bar"><button id="bHand">Use my hand</button></div>
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
+<script type="module" src="./app.js?v=1"></script>
+</body>
+</html>

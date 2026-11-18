@@ -1,0 +1,2756 @@
+{
+  "title": "Animal Cell Atlas",
+  "units": "scene units (not to scale between models)",
+  "models": [
+    {
+      "id": "overview",
+      "name": "Animal Cell (overview)",
+      "file": "animal_cell_overview.glb",
+      "size_mb": 8.27,
+      "camera": {
+        "position": [
+          30.0,
+          -30.0,
+          21.0
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "lens_mm": 50.0
+      },
+      "parts": [
+        {
+          "id": "plasma_cell_membrane",
+          "title": "Plasma (Cell) Membrane",
+          "group": "Boundary",
+          "description": "A ~7-10 nm phospholipid bilayer studded with proteins and cholesterol. It is selectively permeable, controlling what enters and leaves the cell, and carries receptors for cell signalling. Fluid mosaic model: lipids and proteins move laterally within the layer.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Plasma Membrane"
+          ]
+        },
+        {
+          "id": "cytoplasm_cytosol",
+          "title": "Cytoplasm / Cytosol",
+          "group": "Boundary",
+          "description": "The jelly-like fluid (mostly water, salts, proteins) filling the cell between membrane and nucleus. Site of glycolysis and protein synthesis by free ribosomes; suspends all organelles.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Cytoplasm"
+          ]
+        },
+        {
+          "id": "nucleus_nuclear_envelope",
+          "title": "Nucleus - Nuclear Envelope",
+          "group": "Nucleus",
+          "description": "Control centre of the cell. Holds the genome (DNA as chromatin) and is enclosed by a double-membrane nuclear envelope. Site of DNA replication and transcription (DNA -> mRNA). ~5-10 um across. The envelope has an inner and outer membrane separated by the perinuclear space; the outer membrane is continuous with the rough ER.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Nuclear Envelope",
+            "Nuclear Envelope (inner)"
+          ]
+        },
+        {
+          "id": "nuclear_pores",
+          "title": "Nuclear Pores",
+          "group": "Nucleus",
+          "description": "Large protein complexes (~120 nm, ~30 different nucleoporins) that perforate the nuclear envelope. They regulate transport: mRNA and ribosomal subunits move out, proteins (histones, polymerases) move in.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Nuclear Pores"
+          ]
+        },
+        {
+          "id": "nucleolus",
+          "title": "Nucleolus",
+          "group": "Nucleus",
+          "description": "Dense, membrane-less region inside the nucleus where ribosomal RNA (rRNA) is transcribed and assembled with proteins into ribosome subunits, which then exit through the nuclear pores.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Nucleolus"
+          ]
+        },
+        {
+          "id": "chromatin_dna_histones",
+          "title": "Chromatin (DNA + histones)",
+          "group": "Nucleus",
+          "description": "DNA wound around histone proteins (nucleosomes). Loosely packed euchromatin is actively transcribed; densely packed heterochromatin is silent. Condenses into visible chromosomes during cell division.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Chromatin"
+          ]
+        },
+        {
+          "id": "free_ribosomes_polysomes",
+          "title": "Free Ribosomes (Polysomes)",
+          "group": "Ribosomes",
+          "description": "Molecular machines (rRNA + protein, ~25-30 nm) that translate mRNA into protein. Free ribosomes in the cytosol make proteins used inside the cell; several on one mRNA form a polysome.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Free Ribosomes"
+          ]
+        },
+        {
+          "id": "rough_endoplasmic_reticulum_rer",
+          "title": "Rough Endoplasmic Reticulum (RER)",
+          "group": "Endomembrane",
+          "description": "Stacks of flattened membrane sacs (cisternae) continuous with the outer nuclear envelope. Studded with ribosomes that make secretory and membrane proteins, which are threaded into the ER lumen, folded, and glycosylated before being shipped in vesicles to the Golgi.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Rough ER sheet 0",
+            "Rough ER sheet 1",
+            "Rough ER sheet 2",
+            "Rough ER sheet 3"
+          ]
+        },
+        {
+          "id": "bound_ribosomes_on_rer",
+          "title": "Bound Ribosomes (on RER)",
+          "group": "Ribosomes",
+          "description": "Ribosomes docked on the ER membrane via the signal-recognition pathway; they translate proteins destined for secretion, the plasma membrane, or lysosomes.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "RER Ribosomes"
+          ]
+        },
+        {
+          "id": "smooth_endoplasmic_reticulum_ser",
+          "title": "Smooth Endoplasmic Reticulum (SER)",
+          "group": "Endomembrane",
+          "description": "Network of tubules lacking ribosomes. Synthesises lipids, phospholipids and steroid hormones, detoxifies drugs (abundant in liver cells), and stores calcium ions (sarcoplasmic reticulum in muscle).",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Smooth ER"
+          ]
+        },
+        {
+          "id": "golgi_apparatus",
+          "title": "Golgi Apparatus",
+          "group": "Endomembrane",
+          "description": "A stack of 4-8 flattened, curved cisternae. Proteins arrive from the ER at the cis face (toward nucleus), are modified (glycosylation, sorting tags) as they pass through, and leave the trans face in vesicles bound for the plasma membrane, lysosomes, or secretion.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Golgi Apparatus"
+          ]
+        },
+        {
+          "id": "transport_secretory_vesicles",
+          "title": "Transport / Secretory Vesicles",
+          "group": "Endomembrane",
+          "description": "Small membrane bubbles that bud from the ER and Golgi to carry cargo. Secretory vesicles fuse with the plasma membrane to release contents outside the cell (exocytosis).",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Transport Vesicles"
+          ]
+        },
+        {
+          "id": "mitochondrion",
+          "title": "Mitochondrion",
+          "group": "Energy",
+          "description": "The 'powerhouse' of the cell. A double-membrane organelle: the smooth outer membrane encloses a highly folded inner membrane (cristae) that hosts the electron transport chain and ATP synthase, producing ATP by aerobic respiration (Krebs cycle runs in the inner matrix). Has its own circular DNA and 70S ribosomes - evidence of endosymbiotic origin.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Mitochondrion 01",
+            "Mitochondrion 02",
+            "Mitochondrion 03",
+            "Mitochondrion 04",
+            "Mitochondrion 05",
+            "Mitochondrion 06",
+            "Mitochondrion 07",
+            "Mitochondrion 08",
+            "Mitochondrion 09",
+            "Mitochondrion 10",
+            "Mitochondrion 11",
+            "Mitochondrion 12",
+            "Mitochondrion 13",
+            "Mitochondrion 14",
+            "Mitochondrion 15",
+            "Mitochondrion 16"
+          ]
+        },
+        {
+          "id": "mitochondrion_sectioned",
+          "title": "Mitochondrion (sectioned)",
+          "group": "Energy",
+          "description": "The 'powerhouse' of the cell. A double-membrane organelle: the smooth outer membrane encloses a highly folded inner membrane (cristae) that hosts the electron transport chain and ATP synthase, producing ATP by aerobic respiration (Krebs cycle runs in the inner matrix). Has its own circular DNA and 70S ribosomes - evidence of endosymbiotic origin.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Mitochondrion (cut-away view 1)",
+            "Mitochondrion (cut-away view 2)"
+          ]
+        },
+        {
+          "id": "peroxisome",
+          "title": "Peroxisome",
+          "group": "Digestion",
+          "description": "Small single-membrane organelle containing oxidative enzymes (e.g. catalase, often as a crystalline core). Breaks down very-long-chain fatty acids and detoxifies hydrogen peroxide (H2O2 -> H2O + O2).",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Peroxisome 01",
+            "Peroxisome 02",
+            "Peroxisome 03",
+            "Peroxisome 04",
+            "Peroxisome 05",
+            "Peroxisome 06",
+            "Peroxisome 07"
+          ]
+        },
+        {
+          "id": "centrosome_centrioles",
+          "title": "Centrosome / Centrioles",
+          "group": "Cytoskeleton",
+          "description": "The centrosome is the main microtubule-organising centre (MTOC). It contains two centrioles set at right angles, each a cylinder of nine triplet microtubules ('9+0' arrangement). It duplicates before mitosis and organises the spindle fibres that separate chromosomes.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Centriole (daughter)",
+            "Centriole (mother)"
+          ]
+        },
+        {
+          "id": "pericentriolar_material",
+          "title": "Pericentriolar Material",
+          "group": "Cytoskeleton",
+          "description": "Protein matrix (incl. gamma-tubulin ring complexes) surrounding the centrioles, from which microtubules are nucleated.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Pericentriolar Material"
+          ]
+        },
+        {
+          "id": "microtubules",
+          "title": "Microtubules",
+          "group": "Cytoskeleton",
+          "description": "Hollow tubes (~25 nm) of alpha/beta-tubulin radiating from the centrosome. Act as 'railway tracks' for motor proteins (kinesin, dynein) moving vesicles and organelles; form the mitotic spindle, cilia and flagella.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Microtubules"
+          ]
+        },
+        {
+          "id": "actin_microfilaments",
+          "title": "Actin Microfilaments",
+          "group": "Cytoskeleton",
+          "description": "Thin (~7 nm) filaments of actin forming a mesh (cortex) under the plasma membrane. Give the cell its shape, drive cell crawling, endocytosis and the contractile ring that pinches cells apart in cytokinesis.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Actin Filaments (cortex)"
+          ]
+        },
+        {
+          "id": "lysosome",
+          "title": "Lysosome",
+          "group": "Digestion",
+          "description": "Membrane-bound sac of ~50 hydrolytic enzymes working at acidic pH (~4.5-5). Digests worn-out organelles (autophagy), engulfed bacteria and macromolecules; often called the cell's 'recycling centre' / 'suicide bag'.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Lysosome 01",
+            "Lysosome 02",
+            "Lysosome 03",
+            "Lysosome 04",
+            "Lysosome 05",
+            "Lysosome 06",
+            "Lysosome 07",
+            "Lysosome 08",
+            "Lysosome 09"
+          ]
+        }
+      ],
+      "links": {
+        "plasma_cell_membrane": "plasma_membrane",
+        "cytoplasm_cytosol": "plasma_membrane",
+        "nucleus_nuclear_envelope": "nucleus",
+        "nuclear_pores": "nucleus",
+        "nucleolus": "nucleus",
+        "chromatin_dna_histones": "nucleus",
+        "free_ribosomes_polysomes": "ribosome",
+        "rough_endoplasmic_reticulum_rer": "rough_er",
+        "bound_ribosomes_on_rer": "rough_er",
+        "smooth_endoplasmic_reticulum_ser": "smooth_er",
+        "golgi_apparatus": "golgi_apparatus",
+        "transport_secretory_vesicles": "golgi_apparatus",
+        "mitochondrion": "mitochondrion",
+        "mitochondrion_sectioned": "mitochondrion",
+        "lysosome": "lysosome",
+        "peroxisome": "peroxisome",
+        "centrosome_centrioles": "centrosome",
+        "pericentriolar_material": "centrosome",
+        "microtubules": "cytoskeleton",
+        "actin_microfilaments": "cytoskeleton"
+      }
+    },
+    {
+      "id": "centrosome",
+      "name": "Centrosome",
+      "file": "centrosome.glb",
+      "size_mb": 0.86,
+      "camera": {
+        "position": [
+          8.5,
+          -9.0,
+          6.5
+        ],
+        "target": [
+          1.7999999523162842,
+          0.800000011920929,
+          1.399999976158142
+        ],
+        "lens_mm": 36.0
+      },
+      "parts": [
+        {
+          "id": "mother_centriole",
+          "title": "Mother Centriole",
+          "group": "Centrioles",
+          "description": "The older centriole: a 9-fold barrel (~500 x 250 nm) of nine microtubule triplets (A, B, C tubules). It carries distal and subdistal appendages, which anchor microtubules and can dock to the plasma membrane to grow a cilium (as a basal body).",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Mother Centriole"
+          ]
+        },
+        {
+          "id": "daughter_centriole",
+          "title": "Daughter Centriole",
+          "group": "Centrioles",
+          "description": "The younger centriole, set at right angles to the mother's proximal end. Built in the previous cell cycle around a cartwheel scaffold (SAS-6); it lacks appendages until it matures. The two duplicate once per cycle in S phase.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Daughter Centriole"
+          ]
+        },
+        {
+          "id": "cartwheel_sas_6_scaffold",
+          "title": "Cartwheel (SAS-6 scaffold)",
+          "group": "Centrioles",
+          "description": "Hub-and-spoke structure at the proximal end that sets the 9-fold symmetry of a new centriole.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Cartwheel (daughter)",
+            "Cartwheels"
+          ]
+        },
+        {
+          "id": "distal_appendages",
+          "title": "Distal Appendages",
+          "group": "Centrioles",
+          "description": "Nine blade-like projections at the mother centriole's tip that dock it to membranes when forming a primary cilium.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Distal Appendages"
+          ]
+        },
+        {
+          "id": "subdistal_appendages",
+          "title": "Subdistal Appendages",
+          "group": "Centrioles",
+          "description": "Projections that anchor the minus ends of microtubules (via ninein), organising the interphase microtubule aster.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Subdistal Appendages"
+          ]
+        },
+        {
+          "id": "centriole_linker_cohesion_fibres",
+          "title": "Centriole Linker / Cohesion Fibres",
+          "group": "Centrioles",
+          "description": "Rootletin and C-Nap1 fibres that hold the two centrioles together until they split at the start of mitosis.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Centriole Linker (rootletin)"
+          ]
+        },
+        {
+          "id": "pericentriolar_material_pcm",
+          "title": "Pericentriolar Material (PCM)",
+          "group": "Pericentriolar Material",
+          "description": "A dense, partly liquid-like protein matrix (pericentrin, CDK5RAP2, CEP192) around the centrioles. It recruits gamma-tubulin ring complexes that nucleate microtubules, and expands several-fold before mitosis.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "PCM Scaffold (pericentrin, CDK5RAP2)"
+          ]
+        },
+        {
+          "id": "gamma_tubulin_ring_complex_gamma_turc",
+          "title": "Gamma-Tubulin Ring Complex (gamma-TuRC)",
+          "group": "Pericentriolar Material",
+          "description": "A lock-washer ring of 13 gamma-tubulins that templates a new microtubule and caps its minus end, so microtubules grow outward with their plus ends toward the cell edge.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Gamma-Tubulin Ring Complexes"
+          ]
+        },
+        {
+          "id": "aster_microtubules",
+          "title": "Aster Microtubules",
+          "group": "Pericentriolar Material",
+          "description": "Microtubules radiating from the centrosome (the cell's main MTOC). In mitosis they form the spindle that separates chromosomes.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Aster Microtubules"
+          ]
+        },
+        {
+          "id": "centriolar_satellites",
+          "title": "Centriolar Satellites",
+          "group": "Pericentriolar Material",
+          "description": "Granules (PCM1) that shuttle proteins to the centrosome along microtubules.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Centriolar Satellites"
+          ]
+        },
+        {
+          "id": "microtubule_nucleation_enlarged",
+          "title": "Microtubule Nucleation (enlarged)",
+          "group": "Hero: Nucleation",
+          "description": "Alpha/beta-tubulin dimers add onto the gamma-TuRC template, forming 13 protofilaments in a hollow tube 25 nm wide. The growing plus end carries a 'GTP cap' (yellow); if it is lost the microtubule rapidly shrinks - dynamic instability.",
+          "hero": true,
+          "process": "Microtubule nucleation / dynamic instability",
+          "objects": [
+            "Alpha-Tubulin (hero)",
+            "Beta-Tubulin (hero)",
+            "GTP Cap (hero)",
+            "Gamma-TuRC (hero)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cytoskeleton",
+      "name": "Cytoskeleton",
+      "file": "cytoskeleton.glb",
+      "size_mb": 2.03,
+      "camera": {
+        "position": [
+          5.5,
+          -17.0,
+          7.0
+        ],
+        "target": [
+          0.0,
+          0.5,
+          1.5
+        ],
+        "lens_mm": 36.0
+      },
+      "parts": [
+        {
+          "id": "microtubule",
+          "title": "Microtubule",
+          "group": "Microtubules",
+          "description": "Microtubule: a hollow tube (25 nm) of 13 protofilaments made of alpha/beta-tubulin dimers. It is polar - the fast-growing plus end (right, yellow GTP cap) points to the cell edge, the minus end to the centrosome. Tracks for motor proteins; form the mitotic spindle, cilia and flagella. Targeted by colchicine and taxol.",
+          "hero": true,
+          "process": "Intracellular transport / dynamic instability",
+          "objects": [
+            "Microtubule - Alpha Tubulin",
+            "Microtubule - Beta Tubulin",
+            "Microtubule - GTP Cap (+ end)"
+          ]
+        },
+        {
+          "id": "minus_end_cap_gamma_turc",
+          "title": "Minus-end Cap (gamma-TuRC)",
+          "group": "Microtubules",
+          "description": "Caps and stabilises the minus end where the microtubule was nucleated.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Gamma-TuRC (- end cap)"
+          ]
+        },
+        {
+          "id": "kinesin_1_plus_end_motor",
+          "title": "Kinesin-1 (plus-end motor)",
+          "group": "Motor Proteins",
+          "description": "A two-headed motor that 'walks' hand-over-hand toward the microtubule plus end in 8 nm steps, using one ATP per step, hauling vesicles and organelles outward (e.g. down a nerve axon).",
+          "hero": true,
+          "process": "Intracellular transport (motor proteins)",
+          "objects": [
+            "Kinesin-1 Cargo Vesicle",
+            "Kinesin-1 Motor Heads",
+            "Kinesin-1 Stalk"
+          ]
+        },
+        {
+          "id": "cytoplasmic_dynein_minus_end_motor",
+          "title": "Cytoplasmic Dynein (minus-end motor)",
+          "group": "Motor Proteins",
+          "description": "A huge motor with a ring of six AAA+ ATPase domains; with its partner dynactin it carries cargo toward the minus end (to the cell centre) - e.g. moving endosomes to lysosomes or virus particles to the nucleus.",
+          "hero": true,
+          "process": "Intracellular transport (motor proteins)",
+          "objects": [
+            "Dynein Cargo Vesicle",
+            "Dynein Motor Heads",
+            "Dynein Stalk"
+          ]
+        },
+        {
+          "id": "microtubule_catastrophe_shrinking",
+          "title": "Microtubule Catastrophe (shrinking)",
+          "group": "Microtubules",
+          "description": "When the GTP cap is lost, GDP-tubulin protofilaments curl outward like ram's horns and peel apart, so the microtubule shrinks rapidly. Switching between growth and shrinkage (dynamic instability) lets microtubules search the cell and capture chromosomes.",
+          "hero": true,
+          "process": "Dynamic instability",
+          "objects": [
+            "Shrinking Microtubule - Alpha",
+            "Shrinking Microtubule - Beta"
+          ]
+        },
+        {
+          "id": "actin_microfilament_f_actin",
+          "title": "Actin Microfilament (F-actin)",
+          "group": "Actin",
+          "description": "Two strands of globular actin (G-actin) twisted into a 7 nm helix. Polar: grows mainly at the barbed (+) end. Forms the cortex under the membrane, microvilli, stress fibres, the contractile ring of cytokinesis, and with myosin powers muscle contraction and cell crawling.",
+          "hero": true,
+          "process": "Cell motility / muscle contraction / cytokinesis",
+          "objects": [
+            "Actin Filament (strand 1)",
+            "Actin Filament (strand 2)"
+          ]
+        },
+        {
+          "id": "arp2_3_complex",
+          "title": "Arp2/3 Complex",
+          "group": "Actin",
+          "description": "Binds the side of an existing filament and nucleates a new branch at 70 degrees, building the branched actin network that pushes the leading edge (lamellipodium) of a crawling cell forward.",
+          "hero": true,
+          "process": "Cell motility",
+          "objects": [
+            "Arp2/3 Complex"
+          ]
+        },
+        {
+          "id": "myosin_v_actin_motor",
+          "title": "Myosin V (actin motor)",
+          "group": "Motor Proteins",
+          "description": "A two-headed motor that strides 36 nm along actin toward the plus end, carrying vesicles and pigment granules through the cortex. Myosin II, its cousin, slides actin filaments in muscle.",
+          "hero": true,
+          "process": "Intracellular transport / muscle contraction",
+          "objects": [
+            "Myosin V Cargo",
+            "Myosin V Heads",
+            "Myosin V Lever Arms"
+          ]
+        },
+        {
+          "id": "intermediate_filament",
+          "title": "Intermediate Filament",
+          "group": "Intermediate Filaments",
+          "description": "Rope-like 10 nm filaments of tetramers wound together (keratin, vimentin, neurofilaments, nuclear lamins). Not polar and not used by motors - they give cells tensile strength and anchor cell junctions (desmosomes).",
+          "hero": true,
+          "process": "Mechanical support / cell junctions",
+          "objects": [
+            "Intermediate Filament (keratin/vimentin)"
+          ]
+        },
+        {
+          "id": "plasma_membrane_context",
+          "title": "Plasma Membrane (context)",
+          "group": "Context",
+          "description": "The cytoskeleton is anchored to the inner face of the plasma membrane.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Plasma Membrane (context)"
+          ]
+        },
+        {
+          "id": "cortical_actin_network",
+          "title": "Cortical Actin Network",
+          "group": "Context",
+          "description": "A dense mesh of short actin filaments just under the membrane, linked by spectrin and filamin, that shapes the cell surface.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Actin Cortex"
+          ]
+        },
+        {
+          "id": "intermediate_filament_network",
+          "title": "Intermediate Filament Network",
+          "group": "Context",
+          "description": "Rope-like 10 nm filaments of tetramers wound together (keratin, vimentin, neurofilaments, nuclear lamins). Not polar and not used by motors - they give cells tensile strength and anchor cell junctions (desmosomes).",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Intermediate Filament Network"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "golgi_apparatus",
+      "name": "Golgi Apparatus",
+      "file": "golgi_apparatus.glb",
+      "size_mb": 8.23,
+      "camera": {
+        "position": [
+          5.0,
+          -19.0,
+          9.5
+        ],
+        "target": [
+          3.5,
+          0.5,
+          0.4000000059604645
+        ],
+        "lens_mm": 36.0
+      },
+      "parts": [
+        {
+          "id": "cis_golgi_cisterna",
+          "title": "cis-Golgi Cisterna",
+          "group": "Cisternae",
+          "description": "Receiving face of the Golgi, facing the ER. Cargo arrives here in vesicles from the ER/ERGIC; mannose trimming of N-glycans begins and escaped ER proteins (KDEL tag) are sent back in COPI vesicles. (Colour shows the cis -> trans gradient.)",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "cis-Golgi Cisterna",
+            "cis-Golgi Cisterna 2"
+          ]
+        },
+        {
+          "id": "medial_golgi_cisterna",
+          "title": "medial-Golgi Cisterna",
+          "group": "Cisternae",
+          "description": "Middle cisternae where sugar chains are remodelled: enzymes remove mannose and add N-acetylglucosamine; proteins move forward as each cisterna matures (cisternal maturation model). (Colour shows the cis -> trans gradient.)",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "medial-Golgi Cisterna",
+            "medial-Golgi Cisterna 2"
+          ]
+        },
+        {
+          "id": "trans_golgi_cisterna",
+          "title": "trans-Golgi Cisterna",
+          "group": "Cisternae",
+          "description": "Exit-side cisternae: galactose and sialic acid are added, proteins are sulfated and sorted toward the trans-Golgi network for delivery to the plasma membrane, lysosomes or secretory granules. (Colour shows the cis -> trans gradient.)",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "trans-Golgi Cisterna",
+            "trans-Golgi Cisterna 2"
+          ]
+        },
+        {
+          "id": "cargo_glycoproteins",
+          "title": "Cargo Glycoproteins",
+          "group": "Cargo",
+          "description": "Proteins made in the rough ER travelling through the stack. Their sugar trees (drawn as small branches) grow more elaborate cisterna by cisterna as Golgi enzymes trim and add sugars.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Cargo Glycoproteins"
+          ]
+        },
+        {
+          "id": "n_linked_glycans_sugar_chains",
+          "title": "N-linked Glycans (sugar chains)",
+          "group": "Cargo",
+          "description": "Branched oligosaccharides attached to asparagine residues; modified step-by-step in the Golgi. The final glycan acts as an address label and helps proteins fold and function.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Glycan Chains"
+          ]
+        },
+        {
+          "id": "er_golgi_intermediate_compartment_ergic",
+          "title": "ER-Golgi Intermediate Compartment (ERGIC)",
+          "group": "Incoming Traffic",
+          "description": "Vesicles and tubules arriving from ER exit sites (some still COPII-coated) fuse together into vesicular-tubular clusters that travel along microtubules and merge with the cis-Golgi.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "COPII Coats (arriving)",
+            "ERGIC Tubules",
+            "ERGIC Vesicles & Tubules"
+          ]
+        },
+        {
+          "id": "copi_coated_vesicles",
+          "title": "COPI-coated Vesicles",
+          "group": "Vesicle Traffic",
+          "description": "Bud from Golgi rims using the coatomer coat (ARF1-GTP). They carry escaped ER-resident proteins back to the ER (retrograde transport) and move enzymes between cisternae.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "COPI Coat (coatomer)",
+            "COPI Vesicles"
+          ]
+        },
+        {
+          "id": "trans_golgi_network_tgn",
+          "title": "trans-Golgi Network (TGN)",
+          "group": "Outgoing Traffic",
+          "description": "Tubular-reticular sorting station on the trans face. Cargo is sorted by its tags (e.g. mannose-6-phosphate -> lysosomes) into clathrin-coated vesicles, secretory granules or constitutive carriers to the plasma membrane.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "trans-Golgi Network"
+          ]
+        },
+        {
+          "id": "clathrin_coated_vesicles",
+          "title": "Clathrin-coated Vesicles",
+          "group": "Outgoing Traffic",
+          "description": "Vesicles wrapped in a soccer-ball lattice of clathrin triskelions (with adaptor proteins AP-1). From the TGN they deliver lysosomal enzymes (tagged with mannose-6-phosphate) to endosomes/lysosomes.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Clathrin Cage",
+            "Clathrin-coated Vesicles"
+          ]
+        },
+        {
+          "id": "secretory_granules_regulated_secretion",
+          "title": "Secretory Granules (regulated secretion)",
+          "group": "Outgoing Traffic",
+          "description": "Large vesicles with a condensed protein core (hormones, digestive enzymes, neurotransmitters). They wait near the membrane and release their contents by exocytosis only when signalled (e.g. insulin from beta-cells).",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Secretory Granules"
+          ]
+        },
+        {
+          "id": "target_membrane",
+          "title": "Target Membrane",
+          "group": "Hero: Vesicle Fusion",
+          "description": "The membrane the vesicle will fuse with (plasma membrane for exocytosis, or another organelle).",
+          "hero": true,
+          "process": "Vesicle transport, docking and exocytosis",
+          "objects": [
+            "Target Membrane (inner leaflet)",
+            "Target Membrane (outer leaflet)"
+          ]
+        },
+        {
+          "id": "transport_vesicle",
+          "title": "Transport Vesicle",
+          "group": "Hero: Vesicle Fusion",
+          "description": "Membrane sphere (~50-100 nm) carrying cargo. Its v-SNARE pairs with t-SNAREs on the correct target, ensuring delivery to the right address.",
+          "hero": true,
+          "process": "Vesicle transport, docking and exocytosis",
+          "objects": [
+            "Transport Vesicle"
+          ]
+        },
+        {
+          "id": "vesicle_cargo",
+          "title": "Vesicle Cargo",
+          "group": "Hero: Vesicle Fusion",
+          "description": "Proteins to be secreted (released outside the cell when the vesicle fuses).",
+          "hero": true,
+          "process": "Vesicle transport, docking and exocytosis",
+          "objects": [
+            "Vesicle Cargo"
+          ]
+        },
+        {
+          "id": "snare_complex_v_snare_synaptobrevin",
+          "title": "SNARE Complex - v-SNARE (synaptobrevin)",
+          "group": "Hero: Vesicle Fusion",
+          "description": "SNARE proteins zip together into a tight four-helix bundle (1 v-SNARE helix + 3 t-SNARE helices: syntaxin and two from SNAP-25). Zippering pulls the two membranes together and forces them to fuse. Neurotoxins like botulinum toxin cut SNAREs, blocking neurotransmitter release.",
+          "hero": true,
+          "process": "Vesicle transport, docking and exocytosis",
+          "objects": [
+            "v-SNARE (synaptobrevin)"
+          ]
+        },
+        {
+          "id": "snare_complex_t_snare_syntaxin",
+          "title": "SNARE Complex - t-SNARE (syntaxin)",
+          "group": "Hero: Vesicle Fusion",
+          "description": "SNARE proteins zip together into a tight four-helix bundle (1 v-SNARE helix + 3 t-SNARE helices: syntaxin and two from SNAP-25). Zippering pulls the two membranes together and forces them to fuse. Neurotoxins like botulinum toxin cut SNAREs, blocking neurotransmitter release.",
+          "hero": true,
+          "process": "Vesicle transport, docking and exocytosis",
+          "objects": [
+            "t-SNARE (syntaxin)"
+          ]
+        },
+        {
+          "id": "snare_complex_t_snare_snap_25",
+          "title": "SNARE Complex - t-SNARE (SNAP-25)",
+          "group": "Hero: Vesicle Fusion",
+          "description": "SNARE proteins zip together into a tight four-helix bundle (1 v-SNARE helix + 3 t-SNARE helices: syntaxin and two from SNAP-25). Zippering pulls the two membranes together and forces them to fuse. Neurotoxins like botulinum toxin cut SNAREs, blocking neurotransmitter release.",
+          "hero": true,
+          "process": "Vesicle transport, docking and exocytosis",
+          "objects": [
+            "t-SNARE (SNAP-25)"
+          ]
+        },
+        {
+          "id": "rab_gtpase",
+          "title": "Rab GTPase",
+          "group": "Hero: Vesicle Fusion",
+          "description": "Molecular switch on the vesicle that identifies its type and recruits tethering factors and motor proteins.",
+          "hero": true,
+          "process": "Vesicle transport, docking and exocytosis",
+          "objects": [
+            "Rab GTPase"
+          ]
+        },
+        {
+          "id": "tethering_factor",
+          "title": "Tethering Factor",
+          "group": "Hero: Vesicle Fusion",
+          "description": "Long coiled-coil protein (e.g. golgins, exocyst complex) that captures the vesicle from a distance before SNAREs engage.",
+          "hero": true,
+          "process": "Vesicle transport, docking and exocytosis",
+          "objects": [
+            "Tethering Factor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lysosome",
+      "name": "Lysosome",
+      "file": "lysosome.glb",
+      "size_mb": 1.37,
+      "camera": {
+        "position": [
+          9.5,
+          -9.5,
+          6.0
+        ],
+        "target": [
+          1.2000000476837158,
+          1.0,
+          0.30000001192092896
+        ],
+        "lens_mm": 40.0
+      },
+      "parts": [
+        {
+          "id": "lysosomal_membrane",
+          "title": "Lysosomal Membrane",
+          "group": "Membrane",
+          "description": "A single phospholipid bilayer that keeps the acidic (pH ~4.5-5) digestive interior away from the cytosol. If it ruptures, released enzymes can kill the cell.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Lysosomal Membrane"
+          ]
+        },
+        {
+          "id": "lamp_limp_glycoproteins_inner_glycocalyx",
+          "title": "LAMP / LIMP Glycoproteins (inner glycocalyx)",
+          "group": "Membrane",
+          "description": "Lysosome-associated membrane proteins are so heavily glycosylated that they form a sugar coat lining the inside of the membrane, protecting it from being digested by its own enzymes.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "LAMP Glycocalyx"
+          ]
+        },
+        {
+          "id": "v_atpase_proton_pump",
+          "title": "V-ATPase Proton Pump",
+          "group": "Pumps & Transporters",
+          "description": "V-type H+-ATPase: a rotary pump (cousin of ATP synthase run in reverse). The cytosolic V1 head burns ATP to spin the membrane V0 ring, pumping protons into the lumen and keeping it acidic so the enzymes work.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "V-ATPase Proton Pump 01",
+            "V-ATPase Proton Pump 02",
+            "V-ATPase Proton Pump 03",
+            "V-ATPase Proton Pump 04",
+            "V-ATPase Proton Pump 05",
+            "V-ATPase Proton Pump 06",
+            "V-ATPase Proton Pump 07",
+            "V-ATPase Proton Pump 08",
+            "V-ATPase Proton Pump 09",
+            "V-ATPase Proton Pump 10",
+            "V-ATPase Proton Pump 11",
+            "V-ATPase Proton Pump 12",
+            "V-ATPase Proton Pump 13",
+            "V-ATPase Proton Pump 14",
+            "V-ATPase Proton Pump 15",
+            "V-ATPase Proton Pump 16",
+            "V-ATPase Proton Pump 17",
+            "V-ATPase Proton Pump 18",
+            "V-ATPase Proton Pump 19",
+            "V-ATPase Proton Pump 20",
+            "V-ATPase Proton Pump 21",
+            "V-ATPase Proton Pump 22",
+            "V-ATPase Proton Pump 23",
+            "V-ATPase Proton Pump 24",
+            "V-ATPase Proton Pump 25",
+            "V-ATPase Proton Pump 26"
+          ]
+        },
+        {
+          "id": "nutrient_exporters_ion_channels",
+          "title": "Nutrient Exporters & Ion Channels",
+          "group": "Pumps & Transporters",
+          "description": "Transporters that release digestion products - amino acids, sugars, nucleosides, cholesterol (NPC1) - back into the cytosol for reuse, plus Cl- and Ca2+ channels that balance the proton gradient.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Nutrient Exporters"
+          ]
+        },
+        {
+          "id": "mtorc1_nutrient_sensor",
+          "title": "mTORC1 Nutrient Sensor",
+          "group": "Pumps & Transporters",
+          "description": "On the outer surface, Rag GTPases recruit mTORC1 when amino acids are plentiful; it then switches on growth and switches off autophagy. In starvation mTORC1 leaves and autophagy ramps up.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "mTORC1 + Rag GTPases"
+          ]
+        },
+        {
+          "id": "acid_hydrolase_cathepsin_proteases",
+          "title": "Acid Hydrolase - Cathepsin Proteases",
+          "group": "Lumen Contents",
+          "description": "Proteases (cathepsins B, D, L) that cut proteins into peptides and amino acids. About 60 different acid hydrolases are made in the rough ER, tagged with mannose-6-phosphate in the Golgi and delivered here. They only work at acidic pH.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Cathepsin Proteases"
+          ]
+        },
+        {
+          "id": "acid_hydrolase_lipases",
+          "title": "Acid Hydrolase - Lipases",
+          "group": "Lumen Contents",
+          "description": "Acid lipases that split fats and cholesterol esters; missing enzymes cause storage diseases (e.g. Wolman). About 60 different acid hydrolases are made in the rough ER, tagged with mannose-6-phosphate in the Golgi and delivered here. They only work at acidic pH.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Lipases"
+          ]
+        },
+        {
+          "id": "acid_hydrolase_nucleases",
+          "title": "Acid Hydrolase - Nucleases",
+          "group": "Lumen Contents",
+          "description": "DNases and RNases that break nucleic acids into nucleotides. About 60 different acid hydrolases are made in the rough ER, tagged with mannose-6-phosphate in the Golgi and delivered here. They only work at acidic pH.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Nucleases"
+          ]
+        },
+        {
+          "id": "acid_hydrolase_glycosidases",
+          "title": "Acid Hydrolase - Glycosidases",
+          "group": "Lumen Contents",
+          "description": "Enzymes that strip sugars from glycoproteins and glycolipids; loss of hexosaminidase A causes Tay-Sachs disease. About 60 different acid hydrolases are made in the rough ER, tagged with mannose-6-phosphate in the Golgi and delivered here. They only work at acidic pH.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Glycosidases"
+          ]
+        },
+        {
+          "id": "protons_h_acidic_lumen",
+          "title": "Protons (H+) - acidic lumen",
+          "group": "Lumen Contents",
+          "description": "The high proton concentration (pH ~4.5-5, about 100x more acidic than the cytosol) activates the hydrolases and unfolds proteins for digestion.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Protons (H+)"
+          ]
+        },
+        {
+          "id": "digested_organelle_autophagy",
+          "title": "Digested Organelle (autophagy)",
+          "group": "Digestion",
+          "description": "A worn-out mitochondrion delivered by autophagy, half dissolved - its membranes are being broken into lipids and its proteins into amino acids for recycling (mitophagy).",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Mitochondrion Fragment (autophagy)"
+          ]
+        },
+        {
+          "id": "membrane_whorls_myelin_figures",
+          "title": "Membrane Whorls (myelin figures)",
+          "group": "Digestion",
+          "description": "Concentric layers of undigested membrane lipids; accumulate in lipid-storage disorders.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Membrane Whorls"
+          ]
+        },
+        {
+          "id": "protein_aggregates_debris",
+          "title": "Protein Aggregates & Debris",
+          "group": "Digestion",
+          "description": "Clumped, damaged proteins and engulfed particles (from endocytosis or phagocytosis) awaiting breakdown. Lipofuscin 'age pigment' is residue that can't be digested.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Protein Aggregates"
+          ]
+        },
+        {
+          "id": "autophagosome_double_membrane",
+          "title": "Autophagosome (double membrane)",
+          "group": "Hero: Autophagy",
+          "description": "Autophagy ('self-eating'): a cup-shaped membrane (phagophore, marked by LC3) wraps cytoplasm or a damaged organelle and seals into a double-membrane autophagosome, which then fuses with a lysosome to form an autolysosome where the contents are digested.",
+          "hero": true,
+          "process": "Autophagy",
+          "objects": [
+            "Autophagosome Inner Membrane",
+            "Autophagosome Outer Membrane"
+          ]
+        },
+        {
+          "id": "autophagosome_cargo",
+          "title": "Autophagosome Cargo",
+          "group": "Hero: Autophagy",
+          "description": "A damaged mitochondrion tagged (via PINK1/Parkin) for removal.",
+          "hero": true,
+          "process": "Autophagy",
+          "objects": [
+            "Engulfed Mitochondrion"
+          ]
+        },
+        {
+          "id": "lc3_atg8_proteins",
+          "title": "LC3 (Atg8) Proteins",
+          "group": "Hero: Autophagy",
+          "description": "Lipid-anchored marker proteins on autophagosome membranes that recruit cargo receptors.",
+          "hero": true,
+          "process": "Autophagy",
+          "objects": [
+            "LC3 Proteins"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitochondrion",
+      "name": "Mitochondrion",
+      "file": "mitochondrion.glb",
+      "size_mb": 3.67,
+      "camera": {
+        "position": [
+          8.5,
+          -19.0,
+          10.5
+        ],
+        "target": [
+          0.0,
+          1.0,
+          1.600000023841858
+        ],
+        "lens_mm": 40.0
+      },
+      "parts": [
+        {
+          "id": "outer_mitochondrial_membrane",
+          "title": "Outer Mitochondrial Membrane",
+          "group": "Membranes",
+          "description": "Smooth phospholipid bilayer enclosing the organelle. Rich in porin (VDAC) channels that make it permeable to ions and small molecules (<5 kDa). Contains enzymes for lipid synthesis and the TOM protein-import complex.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Outer Membrane"
+          ]
+        },
+        {
+          "id": "inner_mitochondrial_membrane",
+          "title": "Inner Mitochondrial Membrane",
+          "group": "Membranes",
+          "description": "Highly impermeable membrane (rich in cardiolipin) folded into cristae. Holds the electron transport chain (Complexes I-IV) and ATP synthase; pumping H+ across it creates the proton gradient that powers ATP production.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Inner Membrane",
+            "Inner Membrane Patch (IMS side)",
+            "Inner Membrane Patch (matrix side)"
+          ]
+        },
+        {
+          "id": "intermembrane_space",
+          "title": "Intermembrane Space",
+          "group": "Membranes",
+          "description": "Narrow compartment between the outer and inner membranes. Protons (H+) pumped here by the electron transport chain build up a high concentration; also holds cytochrome c, released during apoptosis.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Intermembrane Space"
+          ]
+        },
+        {
+          "id": "cristae",
+          "title": "Cristae",
+          "group": "Internal Structure",
+          "description": "Folds of the inner membrane projecting into the matrix. They massively increase the surface area available for the electron transport chain and ATP synthase; cells with high energy demand (heart muscle) have densely packed cristae. Crista junctions connect them to the inner boundary membrane.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Cristae"
+          ]
+        },
+        {
+          "id": "mitochondrial_matrix",
+          "title": "Mitochondrial Matrix",
+          "group": "Internal Structure",
+          "description": "Dense, protein-rich fluid enclosed by the inner membrane. Site of the Krebs (citric acid) cycle and fatty-acid beta-oxidation, producing NADH and FADH2 that feed the electron transport chain. Contains mtDNA, mitoribosomes and granules.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Matrix"
+          ]
+        },
+        {
+          "id": "atp_synthase_complex_v",
+          "title": "ATP Synthase (Complex V)",
+          "group": "Proteins & Complexes",
+          "description": "A rotary molecular motor embedded in the cristae. H+ ions flowing back into the matrix through its Fo rotor spin the F1 head, which joins ADP + Pi into ATP - about 100+ ATP per second per complex. Pairs of synthases form dimer rows along crista ridges.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "ATP Synthase"
+          ]
+        },
+        {
+          "id": "electron_transport_chain_complexes_i_iv",
+          "title": "Electron Transport Chain (Complexes I-IV)",
+          "group": "Proteins & Complexes",
+          "description": "Protein complexes in the inner membrane that pass electrons from NADH/FADH2 to oxygen (forming water). The energy released pumps protons into the intermembrane space, creating the gradient used by ATP synthase.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Electron Transport Chain"
+          ]
+        },
+        {
+          "id": "porins_vdac_channels",
+          "title": "Porins (VDAC channels)",
+          "group": "Proteins & Complexes",
+          "description": "Barrel-shaped channel proteins in the outer membrane allowing free passage of ions, ATP/ADP and metabolites between the cytosol and the intermembrane space.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Porins (VDAC)"
+          ]
+        },
+        {
+          "id": "mitochondrial_dna_mtdna",
+          "title": "Mitochondrial DNA (mtDNA)",
+          "group": "Matrix Contents",
+          "description": "Small circular genome (16,569 bp in humans) encoding 13 ETC proteins, 22 tRNAs and 2 rRNAs. Several copies per mitochondrion, packed into nucleoids. Inherited only from the mother - evidence for the endosymbiotic origin.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "mtDNA"
+          ]
+        },
+        {
+          "id": "mitochondrial_ribosomes_70s_like",
+          "title": "Mitochondrial Ribosomes (70S-like)",
+          "group": "Matrix Contents",
+          "description": "Bacteria-like ribosomes in the matrix that translate the 13 mtDNA-encoded proteins. Sensitive to some antibiotics that target bacterial ribosomes.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Mitoribosomes (70S)"
+          ]
+        },
+        {
+          "id": "matrix_granules",
+          "title": "Matrix Granules",
+          "group": "Matrix Contents",
+          "description": "Dense granules of calcium phosphate and other ions. Mitochondria buffer cytosolic Ca2+, which also regulates Krebs-cycle enzymes.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Matrix Granules"
+          ]
+        },
+        {
+          "id": "atp_synthase_rotor",
+          "title": "ATP Synthase Rotor",
+          "group": "Hero: ATP Synthase",
+          "description": "Rotate this empty around Z to animate the rotor (c-ring + central stalk).",
+          "hero": true,
+          "process": "Oxidative phosphorylation (ATP synthesis)",
+          "objects": [
+            "ATP Synthase Rotor (spin me)"
+          ]
+        },
+        {
+          "id": "c_ring_fo_rotor",
+          "title": "c-Ring (Fo rotor)",
+          "group": "Hero: ATP Synthase",
+          "description": "A ring of 8-15 c-subunits in the membrane (8 in animals). Each subunit picks up a proton from the intermembrane side, the ring turns, and releases it into the matrix - proton flow drives rotation.",
+          "hero": true,
+          "process": "Oxidative phosphorylation (ATP synthesis)",
+          "objects": [
+            "c-Ring (Fo rotor)"
+          ]
+        },
+        {
+          "id": "central_stalk_gamma_delta_epsilon",
+          "title": "Central Stalk (gamma, delta, epsilon)",
+          "group": "Hero: ATP Synthase",
+          "description": "The asymmetric axle fixed to the c-ring. As it spins inside the F1 head it squeezes each beta subunit in turn, forcing it through three shapes: loose (binds ADP+Pi), tight (makes ATP), open (releases ATP).",
+          "hero": true,
+          "process": "Oxidative phosphorylation (ATP synthesis)",
+          "objects": [
+            "Central Stalk (gamma/epsilon)"
+          ]
+        },
+        {
+          "id": "a_subunit_stator_channel",
+          "title": "a-Subunit (stator channel)",
+          "group": "Hero: ATP Synthase",
+          "description": "Stationary membrane subunit next to the c-ring containing two half-channels: protons enter from the intermembrane space, ride the ring almost a full turn, and exit to the matrix.",
+          "hero": true,
+          "process": "Oxidative phosphorylation (ATP synthesis)",
+          "objects": [
+            "a-Subunit (proton channel)"
+          ]
+        },
+        {
+          "id": "peripheral_stalk_stator",
+          "title": "Peripheral Stalk (stator)",
+          "group": "Hero: ATP Synthase",
+          "description": "A long arm (subunits b, d, F6, OSCP) that holds the F1 head still while the rotor turns - like the frame of a motor.",
+          "hero": true,
+          "process": "Oxidative phosphorylation (ATP synthesis)",
+          "objects": [
+            "Peripheral Stalk (b, OSCP)"
+          ]
+        },
+        {
+          "id": "f1_head_alpha_subunits",
+          "title": "F1 Head - alpha subunits",
+          "group": "Hero: ATP Synthase",
+          "description": "Three alpha subunits alternating with three betas form the F1 head projecting into the matrix. Alphas bind nucleotides but are not catalytic.",
+          "hero": true,
+          "process": "Oxidative phosphorylation (ATP synthesis)",
+          "objects": [
+            "F1 Head - alpha subunits (x3)"
+          ]
+        },
+        {
+          "id": "f1_head_beta_subunits_catalytic",
+          "title": "F1 Head - beta subunits (catalytic)",
+          "group": "Hero: ATP Synthase",
+          "description": "The three catalytic sites. Driven by the rotating stalk, each beta cycles through binding ADP + Pi, forming ATP, and releasing it: ~3 ATP per full turn, >100 turns per second.",
+          "hero": true,
+          "process": "Oxidative phosphorylation (ATP synthesis)",
+          "objects": [
+            "F1 Head - beta subunits (x3)"
+          ]
+        },
+        {
+          "id": "protons_h",
+          "title": "Protons (H+)",
+          "group": "Hero: ATP Synthase",
+          "description": "Pumped into the intermembrane space by the electron transport chain; their flow back through Fo powers the motor (about 3 H+ per ATP, plus 1 for transport).",
+          "hero": true,
+          "process": "Oxidative phosphorylation (ATP synthesis)",
+          "objects": [
+            "Protons (H+).001"
+          ]
+        },
+        {
+          "id": "adp_inorganic_phosphate_substrates",
+          "title": "ADP + inorganic phosphate (substrates)",
+          "group": "Hero: ATP Synthase",
+          "description": "Raw materials entering the F1 head.",
+          "hero": true,
+          "process": "Oxidative phosphorylation (ATP synthesis)",
+          "objects": [
+            "ADP + Pi (substrates)",
+            "ADP + Pi phosphates"
+          ]
+        },
+        {
+          "id": "atp_adenosine_triphosphate_product",
+          "title": "ATP - adenosine triphosphate (product)",
+          "group": "Hero: ATP Synthase",
+          "description": "The cell's energy currency, released from the F1 head and exported to the cytosol by the ADP/ATP translocase.",
+          "hero": true,
+          "process": "Oxidative phosphorylation (ATP synthesis)",
+          "objects": [
+            "ATP (product)",
+            "ATP phosphates"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nucleus",
+      "name": "Nucleus",
+      "file": "nucleus.glb",
+      "size_mb": 10.75,
+      "camera": {
+        "position": [
+          17.0,
+          -16.0,
+          10.0
+        ],
+        "target": [
+          2.5,
+          1.5,
+          0.5
+        ],
+        "lens_mm": 45.0
+      },
+      "parts": [
+        {
+          "id": "outer_nuclear_membrane",
+          "title": "Outer Nuclear Membrane",
+          "group": "Membranes",
+          "description": "Outer lipid bilayer of the nuclear envelope. It is continuous with the rough ER (and like it carries ribosomes) and is connected to the cytoskeleton by LINC complexes (nesprins).",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Outer Nuclear Membrane"
+          ]
+        },
+        {
+          "id": "inner_nuclear_membrane",
+          "title": "Inner Nuclear Membrane",
+          "group": "Membranes",
+          "description": "Inner bilayer of the envelope with its own proteins (lamin B receptor, emerin, SUN proteins) that anchor the nuclear lamina and chromatin. Joins the outer membrane at every nuclear pore.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Inner Nuclear Membrane"
+          ]
+        },
+        {
+          "id": "perinuclear_space",
+          "title": "Perinuclear Space",
+          "group": "Membranes",
+          "description": "20-40 nm gap between the inner and outer nuclear membranes; continuous with the lumen of the endoplasmic reticulum.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Perinuclear Space"
+          ]
+        },
+        {
+          "id": "nuclear_lamina",
+          "title": "Nuclear Lamina",
+          "group": "Membranes",
+          "description": "A meshwork of intermediate filaments (lamins A, B, C) lining the inner membrane. Gives the nucleus mechanical strength, anchors heterochromatin and NPCs, and disassembles during mitosis when lamins are phosphorylated. Lamin A mutations cause progeria.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Nuclear Lamina"
+          ]
+        },
+        {
+          "id": "nuclear_pore_complex",
+          "title": "Nuclear Pore Complex",
+          "group": "Proteins & Complexes",
+          "description": "Nuclear Pore Complex (NPC): a ~110 MDa gateway built from ~30 nucleoporins in 8-fold symmetry. Cytoplasmic filaments capture cargo, the central channel is filled with FG-repeat proteins that form a selective gel, and the nuclear basket hands off mRNA for export. Each NPC moves ~1000 molecules per second.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Nuclear Pore Complex 01",
+            "Nuclear Pore Complex 02",
+            "Nuclear Pore Complex 03",
+            "Nuclear Pore Complex 04",
+            "Nuclear Pore Complex 05",
+            "Nuclear Pore Complex 06",
+            "Nuclear Pore Complex 07",
+            "Nuclear Pore Complex 08",
+            "Nuclear Pore Complex 09",
+            "Nuclear Pore Complex 10",
+            "Nuclear Pore Complex 11",
+            "Nuclear Pore Complex 12",
+            "Nuclear Pore Complex 13",
+            "Nuclear Pore Complex 14",
+            "Nuclear Pore Complex 15",
+            "Nuclear Pore Complex 16",
+            "Nuclear Pore Complex 17",
+            "Nuclear Pore Complex 18",
+            "Nuclear Pore Complex 19",
+            "Nuclear Pore Complex 20",
+            "Nuclear Pore Complex 21",
+            "Nuclear Pore Complex 22",
+            "Nuclear Pore Complex 23",
+            "Nuclear Pore Complex 24",
+            "Nuclear Pore Complex 25",
+            "Nuclear Pore Complex 26",
+            "Nuclear Pore Complex 27",
+            "Nuclear Pore Complex 28",
+            "Nuclear Pore Complex 29",
+            "Nuclear Pore Complex 30",
+            "Nuclear Pore Complex 31",
+            "Nuclear Pore Complex 32",
+            "Nuclear Pore Complex 33",
+            "Nuclear Pore Complex 34",
+            "Nuclear Pore Complex 35",
+            "Nuclear Pore Complex 36",
+            "Nuclear Pore Complex 37",
+            "Nuclear Pore Complex 38",
+            "Nuclear Pore Complex 39",
+            "Nuclear Pore Complex 40",
+            "Nuclear Pore Complex 41",
+            "Nuclear Pore Complex 42",
+            "Nuclear Pore Complex 43",
+            "Nuclear Pore Complex 44",
+            "Nuclear Pore Complex 45",
+            "Nuclear Pore Complex 46",
+            "Nuclear Pore Complex 47",
+            "Nuclear Pore Complex 48",
+            "Nuclear Pore Complex 49",
+            "Nuclear Pore Complex 50",
+            "Nuclear Pore Complex 51",
+            "Nuclear Pore Complex 52",
+            "Nuclear Pore Complex 53",
+            "Nuclear Pore Complex 54",
+            "Nuclear Pore Complex 55",
+            "Nuclear Pore Complex 56",
+            "Nuclear Pore Complex 57",
+            "Nuclear Pore Complex 58",
+            "Nuclear Pore Complex 59",
+            "Nuclear Pore Complex 60",
+            "Nuclear Pore Complex 61",
+            "Nuclear Pore Complex 62",
+            "Nuclear Pore Complex 63",
+            "Nuclear Pore Complex 64",
+            "Nuclear Pore Complex 65",
+            "Nuclear Pore Complex 66",
+            "Nuclear Pore Complex 67",
+            "Nuclear Pore Complex 68",
+            "Nuclear Pore Complex 69",
+            "Nuclear Pore Complex 70",
+            "Nuclear Pore Complex 71",
+            "Nuclear Pore Complex 72",
+            "Nuclear Pore Complex 73",
+            "Nuclear Pore Complex 74",
+            "Nuclear Pore Complex 75",
+            "Nuclear Pore Complex 76",
+            "Nuclear Pore Complex 77",
+            "Nuclear Pore Complex 78",
+            "Nuclear Pore Complex 79",
+            "Nuclear Pore Complex 80"
+          ]
+        },
+        {
+          "id": "euchromatin",
+          "title": "Euchromatin",
+          "group": "Chromatin",
+          "description": "Loosely packed, gene-rich chromatin (the 'beads-on-a-string' 10 nm fiber and looser loops). Accessible to RNA polymerase and transcription factors, so these genes are actively transcribed. Marked by histone acetylation.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Euchromatin"
+          ]
+        },
+        {
+          "id": "heterochromatin",
+          "title": "Heterochromatin",
+          "group": "Chromatin",
+          "description": "Densely packed, transcriptionally silent chromatin, clustered against the nuclear lamina and around the nucleolus. Includes centromeres and telomeres; marked by H3K9 methylation and HP1 protein.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Heterochromatin"
+          ]
+        },
+        {
+          "id": "nucleolus_granular_component",
+          "title": "Nucleolus - Granular Component",
+          "group": "Nucleolus",
+          "description": "Outer region of the nucleolus where pre-ribosomal particles mature: rRNA is processed and assembled with ribosomal proteins into small (40S) and large (60S) subunits, which are then exported through nuclear pores.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Nucleolus - Granular Component"
+          ]
+        },
+        {
+          "id": "nucleolus_dense_fibrillar_component",
+          "title": "Nucleolus - Dense Fibrillar Component",
+          "group": "Nucleolus",
+          "description": "Shell around each fibrillar centre where newly transcribed pre-rRNA is cleaved and chemically modified (guided by snoRNAs and fibrillarin).",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Nucleolus - Dense Fibrillar Component"
+          ]
+        },
+        {
+          "id": "nucleolus_fibrillar_centres",
+          "title": "Nucleolus - Fibrillar Centres",
+          "group": "Nucleolus",
+          "description": "Pale cores containing the rDNA genes (nucleolar organiser regions) and RNA polymerase I, which transcribes the 45S pre-rRNA at their boundary.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Nucleolus - Fibrillar Centers"
+          ]
+        },
+        {
+          "id": "nuclear_speckles",
+          "title": "Nuclear Speckles",
+          "group": "Nuclear Bodies",
+          "description": "Membrane-less storage/assembly sites for pre-mRNA splicing factors (snRNPs, SR proteins), located near highly active genes.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Nuclear Speckles"
+          ]
+        },
+        {
+          "id": "cajal_bodies",
+          "title": "Cajal Bodies",
+          "group": "Nuclear Bodies",
+          "description": "Small nuclear bodies where small nuclear RNPs (used in splicing) and telomerase RNA are assembled and modified.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Cajal Bodies"
+          ]
+        },
+        {
+          "id": "nucleoplasm",
+          "title": "Nucleoplasm",
+          "group": "Nuclear Bodies",
+          "description": "The viscous fluid inside the nucleus in which chromatin, the nucleolus and nuclear bodies are suspended; rich in nucleotides, enzymes and transcription factors.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Nucleoplasm"
+          ]
+        },
+        {
+          "id": "mrna_export",
+          "title": "mRNA Export",
+          "group": "Process: mRNA Export",
+          "description": "A mature, spliced mRNA (with 5' cap and poly-A tail) bound by export proteins (mRNP) threads through a nuclear pore, basket first, to reach ribosomes in the cytoplasm. Animatable path for the transcription -> translation story.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "mRNA (being exported)"
+          ]
+        },
+        {
+          "id": "mrnp_export_proteins",
+          "title": "mRNP Export Proteins",
+          "group": "Process: mRNA Export",
+          "description": "Proteins (e.g. TREX complex, NXF1/NXT1 receptor, cap-binding complex) that coat the mRNA and escort it through the pore.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "mRNP Export Proteins"
+          ]
+        },
+        {
+          "id": "histone_h2a",
+          "title": "Histone H2A",
+          "group": "Hero: Nucleosome",
+          "description": "One of the four core histones; two copies each of H2A, H2B, H3 and H4 form the octamer around which DNA wraps. Their N-terminal tails are acetylated or methylated to switch genes on or off (the histone code).",
+          "hero": true,
+          "process": "DNA packaging / gene regulation",
+          "objects": [
+            "Histone H2A (x2)"
+          ]
+        },
+        {
+          "id": "histone_h2b",
+          "title": "Histone H2B",
+          "group": "Hero: Nucleosome",
+          "description": "One of the four core histones; two copies each of H2A, H2B, H3 and H4 form the octamer around which DNA wraps. Their N-terminal tails are acetylated or methylated to switch genes on or off (the histone code).",
+          "hero": true,
+          "process": "DNA packaging / gene regulation",
+          "objects": [
+            "Histone H2B (x2)"
+          ]
+        },
+        {
+          "id": "histone_h3",
+          "title": "Histone H3",
+          "group": "Hero: Nucleosome",
+          "description": "One of the four core histones; two copies each of H2A, H2B, H3 and H4 form the octamer around which DNA wraps. Their N-terminal tails are acetylated or methylated to switch genes on or off (the histone code).",
+          "hero": true,
+          "process": "DNA packaging / gene regulation",
+          "objects": [
+            "Histone H3 (x2)"
+          ]
+        },
+        {
+          "id": "histone_h4",
+          "title": "Histone H4",
+          "group": "Hero: Nucleosome",
+          "description": "One of the four core histones; two copies each of H2A, H2B, H3 and H4 form the octamer around which DNA wraps. Their N-terminal tails are acetylated or methylated to switch genes on or off (the histone code).",
+          "hero": true,
+          "process": "DNA packaging / gene regulation",
+          "objects": [
+            "Histone H4 (x2)"
+          ]
+        },
+        {
+          "id": "nucleosome_dna",
+          "title": "Nucleosome DNA",
+          "group": "Hero: Nucleosome",
+          "description": "~147 base pairs of DNA wrapped 1.65 left-handed turns around the histone octamer, plus linker DNA connecting neighbouring nucleosomes. The double helix (sugar-phosphate backbones joined by base pairs) is shown here.",
+          "hero": true,
+          "process": "DNA packaging / gene regulation",
+          "objects": [
+            "Nucleosome DNA (backbone)",
+            "Nucleosome DNA (base pairs)"
+          ]
+        },
+        {
+          "id": "histone_h1_linker_histone",
+          "title": "Histone H1 (linker histone)",
+          "group": "Hero: Nucleosome",
+          "description": "Binds where DNA enters and exits the nucleosome, locking the wrap and helping fold nucleosomes into the more compact 30 nm chromatin fibre.",
+          "hero": true,
+          "process": "DNA packaging / gene regulation",
+          "objects": [
+            "Histone H1 (linker)"
+          ]
+        },
+        {
+          "id": "sister_chromatid",
+          "title": "Sister Chromatid",
+          "group": "Hero: Chromosome",
+          "description": "One of two identical copies of a replicated chromosome, made of a single, extremely condensed DNA molecule (~10,000x compacted). The dark/light stripes represent G-banding patterns used in karyotyping. Sister chromatids separate in anaphase of mitosis.",
+          "hero": true,
+          "process": "Mitosis / meiosis",
+          "objects": [
+            "Sister Chromatid A",
+            "Sister Chromatid B"
+          ]
+        },
+        {
+          "id": "centromere_kinetochores",
+          "title": "Centromere & Kinetochores",
+          "group": "Hero: Chromosome",
+          "description": "The centromere is the constricted region joining sister chromatids (held by cohesin). Kinetochores are protein plates on each side where spindle microtubules attach to pull chromatids to opposite poles.",
+          "hero": true,
+          "process": "Mitosis / meiosis",
+          "objects": [
+            "Kinetochores"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peroxisome",
+      "name": "Peroxisome",
+      "file": "peroxisome.glb",
+      "size_mb": 5.74,
+      "camera": {
+        "position": [
+          9.5,
+          -9.5,
+          5.5
+        ],
+        "target": [
+          1.7999999523162842,
+          1.2999999523162842,
+          0.4000000059604645
+        ],
+        "lens_mm": 34.0
+      },
+      "parts": [
+        {
+          "id": "peroxisomal_membrane",
+          "title": "Peroxisomal Membrane",
+          "group": "Membrane",
+          "description": "Single bilayer enclosing the peroxisome (0.1-1 um). Unlike mitochondria it has no DNA - all its proteins are imported from the cytosol, fully folded.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Peroxisomal Membrane"
+          ]
+        },
+        {
+          "id": "pex13_pex14_docking_complex",
+          "title": "PEX13/PEX14 Docking Complex",
+          "group": "Import & Transport",
+          "description": "Membrane docking site where the cytosolic receptor PEX5, carrying a cargo enzyme with the PTS1 tag (-SKL at its C-terminus), binds and forms a transient pore to deliver the folded protein inside.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "PEX14/PEX13 Docking Complexes"
+          ]
+        },
+        {
+          "id": "pex2_pex10_pex12_ubiquitin_ligase_ring",
+          "title": "PEX2-PEX10-PEX12 Ubiquitin-ligase Ring",
+          "group": "Import & Transport",
+          "description": "Ring-shaped complex that ubiquitinates PEX5 so it can be pulled out of the membrane (by PEX1/PEX6) and reused. Mutations in PEX genes cause Zellweger syndrome.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "PEX2/10/12 Ring Ligases"
+          ]
+        },
+        {
+          "id": "abcd1_transporter",
+          "title": "ABCD1 Transporter",
+          "group": "Import & Transport",
+          "description": "ATP-driven transporter importing very-long-chain fatty acids for beta-oxidation. Defects cause X-linked adrenoleukodystrophy (the 'Lorenzo's Oil' disease).",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "ABCD Fatty-acid Transporters"
+          ]
+        },
+        {
+          "id": "crystalline_core_urate_oxidase",
+          "title": "Crystalline Core (urate oxidase)",
+          "group": "Matrix",
+          "description": "A regular lattice of the enzyme urate oxidase (uricase), which breaks down uric acid. Humans and other apes lost this enzyme, which is why we can get gout; in rodent liver it forms this striking crystal.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Crystalline Core (urate oxidase)"
+          ]
+        },
+        {
+          "id": "catalase",
+          "title": "Catalase",
+          "group": "Matrix",
+          "description": "Tetrameric haem enzyme and one of the fastest known (millions of reactions per second): 2 H2O2 -> 2 H2O + O2. It destroys the toxic hydrogen peroxide made by peroxisomal oxidases.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Catalase"
+          ]
+        },
+        {
+          "id": "oxidases",
+          "title": "Oxidases",
+          "group": "Matrix",
+          "description": "Oxidases (e.g. D-amino-acid oxidase, acyl-CoA oxidase) strip hydrogen from substrates and hand it to O2, producing H2O2.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Oxidases"
+          ]
+        },
+        {
+          "id": "beta_oxidation_enzymes",
+          "title": "Beta-oxidation Enzymes",
+          "group": "Matrix",
+          "description": "Enzymes that shorten very-long-chain and branched fatty acids by beta-oxidation; the shortened chains go to mitochondria. Peroxisomes also make plasmalogens - key lipids of myelin.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Beta-oxidation Enzymes"
+          ]
+        },
+        {
+          "id": "hydrogen_peroxide_h2o2",
+          "title": "Hydrogen Peroxide (H2O2)",
+          "group": "Molecules",
+          "description": "Toxic by-product of peroxisomal oxidases; must be destroyed before it damages DNA and membranes.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "H2O2 Molecules",
+            "H2O2 Molecules (H)"
+          ]
+        },
+        {
+          "id": "water_h2o",
+          "title": "Water (H2O)",
+          "group": "Molecules",
+          "description": "Harmless product of catalase.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "H2O Molecules",
+            "H2O Molecules (H)"
+          ]
+        },
+        {
+          "id": "oxygen_o2",
+          "title": "Oxygen (O2)",
+          "group": "Molecules",
+          "description": "Released by catalase; also consumed by oxidases.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "O2 Molecules"
+          ]
+        },
+        {
+          "id": "catalase_enlarged",
+          "title": "Catalase (enlarged)",
+          "group": "Hero: Catalase",
+          "description": "Four identical subunits, each with a haem iron at its active site deep inside a channel. Two H2O2 enter; two H2O and one O2 leave.",
+          "hero": true,
+          "process": "Detoxification of H2O2 by catalase",
+          "objects": [
+            "Catalase Tetramer (hero)",
+            "Haem Active Sites (hero)"
+          ]
+        },
+        {
+          "id": "catalase_reaction_2_h2o2_2_h2o_o2",
+          "title": "Catalase Reaction: 2 H2O2 -> 2 H2O + O2",
+          "group": "Hero: Catalase",
+          "description": "Substrate: 2 H2O2. Each molecule is a separate object so the reaction can be animated.",
+          "hero": true,
+          "process": "Detoxification of H2O2 by catalase",
+          "objects": [
+            "H2O (hero Product)",
+            "H2O (hero Product) H",
+            "H2O (hero Product).001",
+            "H2O (hero Product).001 H",
+            "H2O2 (hero Substrate)",
+            "H2O2 (hero Substrate) H",
+            "H2O2 (hero Substrate).001",
+            "H2O2 (hero Substrate).001 H",
+            "O2 (hero Product)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "plasma_membrane",
+      "name": "Plasma Membrane",
+      "file": "plasma_membrane.glb",
+      "size_mb": 3.74,
+      "camera": {
+        "position": [
+          4.5,
+          -15.5,
+          12.5
+        ],
+        "target": [
+          3.200000047683716,
+          0.30000001192092896,
+          -0.30000001192092896
+        ],
+        "lens_mm": 32.0
+      },
+      "parts": [
+        {
+          "id": "phosphatidylcholine_heads_outer_leaflet",
+          "title": "Phosphatidylcholine heads (outer leaflet)",
+          "group": "Lipids",
+          "description": "The most common phospholipid of the outer leaflet. Each phospholipid has a hydrophilic phosphate head (facing water) and two hydrophobic fatty-acid tails; a kinked tail marks a cis double bond (unsaturated), which keeps the membrane fluid.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Phospholipid Heads - PC"
+          ]
+        },
+        {
+          "id": "sphingomyelin_heads_outer_leaflet",
+          "title": "Sphingomyelin heads (outer leaflet)",
+          "group": "Lipids",
+          "description": "Sphingolipid with long saturated tails; packs tightly with cholesterol to form thicker, ordered 'lipid rafts'.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Phospholipid Heads - SM"
+          ]
+        },
+        {
+          "id": "phosphatidylethanolamine_heads_inner_leaflet",
+          "title": "Phosphatidylethanolamine heads (inner leaflet)",
+          "group": "Lipids",
+          "description": "Major inner-leaflet phospholipid; its small head favours membrane curvature (budding and fusion).",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Phospholipid Heads - PE"
+          ]
+        },
+        {
+          "id": "phosphatidylserine_heads_inner_leaflet",
+          "title": "Phosphatidylserine heads (inner leaflet)",
+          "group": "Lipids",
+          "description": "Negatively charged lipid kept on the inner leaflet by flippases. When it appears on the outer surface it is an 'eat me' signal for apoptotic cells.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Phospholipid Heads - PS"
+          ]
+        },
+        {
+          "id": "fatty_acid_tails_hydrophobic_core",
+          "title": "Fatty-acid Tails (hydrophobic core)",
+          "group": "Lipids",
+          "description": "The two leaflets' tails face each other, forming an oily core ~3-4 nm thick that blocks ions and polar molecules - the basis of selective permeability.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Fatty Acid Tails"
+          ]
+        },
+        {
+          "id": "cholesterol",
+          "title": "Cholesterol",
+          "group": "Lipids",
+          "description": "Rigid ring-shaped lipid tucked between phospholipids (up to ~40% of membrane lipids). It buffers fluidity - stiffening warm membranes and preventing cold ones from freezing - and is enriched in rafts.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Cholesterol"
+          ]
+        },
+        {
+          "id": "glycolipids_gangliosides",
+          "title": "Glycolipids (gangliosides)",
+          "group": "Lipids",
+          "description": "Lipids carrying sugar chains on the outer surface; part of the glycocalyx, used in cell recognition (and blood-group antigens).",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Glycolipids"
+          ]
+        },
+        {
+          "id": "aquaporin",
+          "title": "Aquaporin",
+          "group": "Channels & Pumps",
+          "description": "Tetramer; each subunit is a barrel of 6 helices forming a narrow pore that passes ~3 billion water molecules per second in single file while blocking protons. Abundant in kidney tubules and red blood cells.",
+          "hero": true,
+          "process": "Osmosis / water transport",
+          "objects": [
+            "Aquaporin (water channel)"
+          ]
+        },
+        {
+          "id": "water_in_aquaporin",
+          "title": "Water in Aquaporin",
+          "group": "Channels & Pumps",
+          "description": "Water molecules move single-file through each aquaporin pore by osmosis.",
+          "hero": true,
+          "process": "Osmosis / water transport",
+          "objects": [
+            "Water Molecules (in channel)",
+            "Water Molecules H"
+          ]
+        },
+        {
+          "id": "sodium_potassium_pump_na_k_atpase",
+          "title": "Sodium-Potassium Pump (Na+/K+-ATPase)",
+          "group": "Channels & Pumps",
+          "description": "Primary active transport: each cycle uses one ATP to pump 3 Na+ out and 2 K+ in, creating the gradients that power nerve impulses, nutrient uptake and cell-volume control. Uses ~20-40% of a resting cell's energy.",
+          "hero": true,
+          "process": "Active transport (Na+/K+ pump)",
+          "objects": [
+            "Na+/K+ ATPase (alpha subunit)",
+            "Na+/K+ ATPase (beta subunit)"
+          ]
+        },
+        {
+          "id": "sodium_ions_na",
+          "title": "Sodium Ions (Na+)",
+          "group": "Ions",
+          "description": "3 Na+ are pumped out of the cell per cycle; Na+ is ~10x higher outside.",
+          "hero": true,
+          "process": "Active transport (Na+/K+ pump)",
+          "objects": [
+            "Na+ Ions (pumped out)"
+          ]
+        },
+        {
+          "id": "potassium_ions_k",
+          "title": "Potassium Ions (K+)",
+          "group": "Ions",
+          "description": "2 K+ are pumped into the cell per cycle; K+ is ~30x higher inside.",
+          "hero": true,
+          "process": "Active transport (Na+/K+ pump)",
+          "objects": [
+            "K+ Ions (in pore)",
+            "K+ Ions (pumped in)"
+          ]
+        },
+        {
+          "id": "g_protein_coupled_receptor_gpcr",
+          "title": "G-Protein-Coupled Receptor (GPCR)",
+          "group": "Receptors & Signalling",
+          "description": "Seven helices snake through the membrane. When a signal molecule (hormone, neurotransmitter, odour, light) binds outside, the receptor changes shape and activates a G protein inside. ~1/3 of all drugs target GPCRs.",
+          "hero": true,
+          "process": "Cell signalling (GPCR)",
+          "objects": [
+            "GPCR (7-transmembrane receptor)"
+          ]
+        },
+        {
+          "id": "ligand_first_messenger",
+          "title": "Ligand (first messenger)",
+          "group": "Receptors & Signalling",
+          "description": "A hormone or neurotransmitter binding the receptor's outer pocket.",
+          "hero": true,
+          "process": "Cell signalling (GPCR)",
+          "objects": [
+            "Signal Molecule (ligand)"
+          ]
+        },
+        {
+          "id": "heterotrimeric_g_protein_g_alpha_gdp_gtp",
+          "title": "Heterotrimeric G Protein - G-alpha (GDP/GTP)",
+          "group": "Receptors & Signalling",
+          "description": "The alpha subunit swaps GDP for GTP when activated, then leaves to switch on enzymes like adenylyl cyclase (making cAMP).",
+          "hero": true,
+          "process": "Cell signalling (GPCR)",
+          "objects": [
+            "G-alpha (GDP/GTP)"
+          ]
+        },
+        {
+          "id": "heterotrimeric_g_protein_g_beta",
+          "title": "Heterotrimeric G Protein - G-beta",
+          "group": "Receptors & Signalling",
+          "description": "Beta-gamma pair; released on activation, it can open ion channels.",
+          "hero": true,
+          "process": "Cell signalling (GPCR)",
+          "objects": [
+            "G-beta"
+          ]
+        },
+        {
+          "id": "heterotrimeric_g_protein_g_gamma",
+          "title": "Heterotrimeric G Protein - G-gamma",
+          "group": "Receptors & Signalling",
+          "description": "Small subunit tethered to the membrane by a lipid anchor.",
+          "hero": true,
+          "process": "Cell signalling (GPCR)",
+          "objects": [
+            "G-gamma"
+          ]
+        },
+        {
+          "id": "voltage_gated_potassium_channel",
+          "title": "Voltage-gated Potassium Channel",
+          "group": "Channels & Pumps",
+          "description": "Four subunits surround a central pore with a selectivity filter that lets K+ (but not smaller Na+) through at ~100 million ions/s. Voltage sensors open it to reset the membrane after a nerve impulse.",
+          "hero": true,
+          "process": "Action potential / ion channels",
+          "objects": [
+            "Voltage-gated K+ Channel"
+          ]
+        },
+        {
+          "id": "receptor_tyrosine_kinase_e_g_insulin_egf_receptor",
+          "title": "Receptor Tyrosine Kinase (e.g. insulin / EGF receptor)",
+          "group": "Receptors & Signalling",
+          "description": "Growth-factor binding brings two receptors together; their inner kinase domains phosphorylate each other on tyrosines (yellow phosphates), which recruit signalling proteins (Ras-MAPK pathway) to trigger growth and division. Mutant RTKs drive many cancers.",
+          "hero": true,
+          "process": "Growth-factor signalling (RTK)",
+          "objects": [
+            "Phosphate Groups",
+            "RTK Kinase Domains",
+            "RTK Ligand-binding Domains",
+            "RTK Transmembrane Helices"
+          ]
+        },
+        {
+          "id": "glycoproteins_glycocalyx",
+          "title": "Glycoproteins & Glycocalyx",
+          "group": "Glycocalyx",
+          "description": "Membrane proteins carrying branched sugar chains on the outside. Together with glycolipids they form the glycocalyx - a sugar coat used for cell recognition, adhesion and protection (and the ABO blood groups).",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Glycocalyx Sugar Chains",
+            "Glycoproteins"
+          ]
+        },
+        {
+          "id": "lipid_raft_gpi_anchored_protein",
+          "title": "Lipid Raft & GPI-anchored Protein",
+          "group": "Glycocalyx",
+          "description": "Rafts are small, ordered patches rich in sphingolipids and cholesterol (slightly thicker - see the orange heads). They gather signalling proteins such as GPI-anchored proteins, which are tethered to the outer leaflet only by a lipid.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "GPI-anchored Protein (raft)"
+          ]
+        },
+        {
+          "id": "spectrin_actin_membrane_skeleton",
+          "title": "Spectrin-Actin Membrane Skeleton",
+          "group": "Membrane Skeleton",
+          "description": "A meshwork of long spectrin tetramers joined at short actin filaments, linked to membrane proteins by ankyrin. It gives the membrane strength and elasticity (red blood cells squeeze through capillaries thanks to it).",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Actin Junctions",
+            "Spectrin Network"
+          ]
+        },
+        {
+          "id": "receptor_mediated_endocytosis",
+          "title": "Receptor-mediated Endocytosis",
+          "group": "Hero: Endocytosis",
+          "description": "Left to right: (1) receptors bound to cargo cluster in a clathrin-coated pit, (2) the pit deepens into a bud and dynamin (green spiral) constricts the neck using GTP, (3) the vesicle pinches off, sheds its clathrin coat and fuses with an early endosome. Each stage is a separate object for animation.",
+          "hero": true,
+          "process": "Receptor-mediated endocytosis",
+          "objects": [
+            "Budding Vesicle",
+            "Clathrin Coat",
+            "Coated Vesicle (free)",
+            "Dynamin Collar",
+            "Membrane (endocytosis hero)",
+            "Vesicle Neck"
+          ]
+        },
+        {
+          "id": "receptor_mediated_endocytosis_ldl_receptors",
+          "title": "Receptor-mediated Endocytosis - LDL Receptors",
+          "group": "Hero: Endocytosis",
+          "description": "Receptors that bind cargo outside the cell and gather in clathrin-coated pits (via adaptor protein AP-2).",
+          "hero": true,
+          "process": "Receptor-mediated endocytosis",
+          "objects": [
+            "LDL Receptors"
+          ]
+        },
+        {
+          "id": "receptor_mediated_endocytosis_ldl_particles",
+          "title": "Receptor-mediated Endocytosis - LDL Particles",
+          "group": "Hero: Endocytosis",
+          "description": "Low-density lipoprotein: a ball of cholesterol esters wrapped in phospholipid; the cargo taken up here. Faulty LDL receptors cause familial hypercholesterolaemia.",
+          "hero": true,
+          "process": "Receptor-mediated endocytosis",
+          "objects": [
+            "LDL Particles (cholesterol)"
+          ]
+        },
+        {
+          "id": "receptor_mediated_endocytosis_apob_100_protein",
+          "title": "Receptor-mediated Endocytosis - ApoB-100 Protein",
+          "group": "Hero: Endocytosis",
+          "description": "The protein belt on each LDL particle that the receptor recognises.",
+          "hero": true,
+          "process": "Receptor-mediated endocytosis",
+          "objects": [
+            "ApoB-100 Protein"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ribosome",
+      "name": "Ribosome",
+      "file": "ribosome.glb",
+      "size_mb": 0.58,
+      "camera": {
+        "position": [
+          2.5999999046325684,
+          -14.5,
+          2.5999999046325684
+        ],
+        "target": [
+          1.0,
+          0.20000000298023224,
+          -0.6000000238418579
+        ],
+        "lens_mm": 40.0
+      },
+      "parts": [
+        {
+          "id": "large_ribosomal_subunit_60s",
+          "title": "Large Ribosomal Subunit (60S)",
+          "group": "Subunits",
+          "description": "Made of 3 rRNAs (28S, 5.8S, 5S) and ~47 proteins. Holds the peptidyl-transferase centre, a ribozyme (RNA enzyme) that joins amino acids with peptide bonds, and the exit tunnel through which the new protein leaves. Has binding sites A (aminoacyl), P (peptidyl) and E (exit) for tRNAs. (Bacteria: 50S)",
+          "hero": true,
+          "process": "Translation (protein synthesis)",
+          "objects": [
+            "Large Subunit (60S)"
+          ]
+        },
+        {
+          "id": "small_ribosomal_subunit_40s",
+          "title": "Small Ribosomal Subunit (40S)",
+          "group": "Subunits",
+          "description": "Made of 18S rRNA and ~33 proteins. Binds the mRNA, scans for the start codon (AUG) and checks codon-anticodon pairing in the decoding centre, so the right amino acid is added. (Bacteria: 30S)",
+          "hero": true,
+          "process": "Translation (protein synthesis)",
+          "objects": [
+            "Small Subunit (40S)"
+          ]
+        },
+        {
+          "id": "ribosomal_proteins",
+          "title": "Ribosomal Proteins",
+          "group": "Subunits",
+          "description": "~80 small proteins that stabilise the rRNA scaffold; the rRNA, not the proteins, does the catalysis. They sit mostly on the outer surface.",
+          "hero": true,
+          "process": "Translation (protein synthesis)",
+          "objects": [
+            "Large Subunit Proteins",
+            "Small Subunit Proteins"
+          ]
+        },
+        {
+          "id": "polypeptide_exit_tunnel",
+          "title": "Polypeptide Exit Tunnel",
+          "group": "Catalytic Core",
+          "description": "A ~100 A long tunnel through the large subunit; holds ~30-40 amino acids of the growing chain. Some proteins begin folding into helices inside it.",
+          "hero": true,
+          "process": "Translation (protein synthesis)",
+          "objects": [
+            "Exit Tunnel"
+          ]
+        },
+        {
+          "id": "peptidyl_transferase_centre_ptc",
+          "title": "Peptidyl Transferase Centre (PTC)",
+          "group": "Catalytic Core",
+          "description": "The active site where the amino acid on the A-site tRNA attacks the growing chain on the P-site tRNA, forming a peptide bond. It is made of rRNA - proof that the ribosome is a ribozyme.",
+          "hero": true,
+          "process": "Translation (protein synthesis)",
+          "objects": [
+            "Peptidyl Transferase Centre"
+          ]
+        },
+        {
+          "id": "mrna_messenger_rna",
+          "title": "mRNA (messenger RNA)",
+          "group": "mRNA",
+          "description": "A copy of a gene read 5' -> 3' in triplets called codons. Here: ...GGC | AUG (E site) | GCU (P site) | UUC (A site) | AAA | GGC | UAA (stop)... The ribosome moves one codon (3 nucleotides) per step - translocation.",
+          "hero": true,
+          "process": "Translation (protein synthesis)",
+          "objects": [
+            "mRNA Backbone"
+          ]
+        },
+        {
+          "id": "mrna_nucleotide_bases",
+          "title": "mRNA Nucleotide Bases",
+          "group": "mRNA",
+          "description": "Bases A (green), U (red), G (yellow), C (blue). Each codon of three bases specifies one amino acid via the genetic code; AUG = start (Methionine), UAA/UAG/UGA = stop.",
+          "hero": true,
+          "process": "Translation (protein synthesis)",
+          "objects": [
+            "mRNA Bases (A)",
+            "mRNA Bases (C)",
+            "mRNA Bases (G)",
+            "mRNA Bases (U)"
+          ]
+        },
+        {
+          "id": "transfer_rna_trna_e_exit_site",
+          "title": "Transfer RNA (tRNA) - E (exit) site",
+          "group": "tRNAs",
+          "description": "An L-shaped adapter RNA (~76 nucleotides). Its anticodon UAC pairs with mRNA codon AUG; the matching amino acid is attached to its 3' CCA end by an aminoacyl-tRNA synthetase. Its amino acid has already been transferred; it is about to leave the ribosome.",
+          "hero": true,
+          "process": "Translation (protein synthesis)",
+          "objects": [
+            "tRNA E-site (Met)",
+            "tRNA E-site (Met) - deacylated",
+            "tRNA E-site (Met) anticodon A",
+            "tRNA E-site (Met) anticodon C",
+            "tRNA E-site (Met) anticodon U"
+          ]
+        },
+        {
+          "id": "transfer_rna_trna_p_peptidyl_site",
+          "title": "Transfer RNA (tRNA) - P (peptidyl) site",
+          "group": "tRNAs",
+          "description": "An L-shaped adapter RNA (~76 nucleotides). Its anticodon CGA pairs with mRNA codon GCU; the matching amino acid is attached to its 3' CCA end by an aminoacyl-tRNA synthetase. It holds the growing polypeptide chain.",
+          "hero": true,
+          "process": "Translation (protein synthesis)",
+          "objects": [
+            "tRNA P-site (Ala)",
+            "tRNA P-site (Ala) - Alanine",
+            "tRNA P-site (Ala) anticodon A",
+            "tRNA P-site (Ala) anticodon C",
+            "tRNA P-site (Ala) anticodon G"
+          ]
+        },
+        {
+          "id": "transfer_rna_trna_a_aminoacyl_site",
+          "title": "Transfer RNA (tRNA) - A (aminoacyl) site",
+          "group": "tRNAs",
+          "description": "An L-shaped adapter RNA (~76 nucleotides). Its anticodon AAG pairs with mRNA codon UUC; the matching amino acid is attached to its 3' CCA end by an aminoacyl-tRNA synthetase. It has just delivered its amino acid, which will be joined to the chain.",
+          "hero": true,
+          "process": "Translation (protein synthesis)",
+          "objects": [
+            "tRNA A-site (Phe)",
+            "tRNA A-site (Phe) - Phenylalanine",
+            "tRNA A-site (Phe) anticodon A",
+            "tRNA A-site (Phe) anticodon G"
+          ]
+        },
+        {
+          "id": "nascent_polypeptide",
+          "title": "Nascent Polypeptide",
+          "group": "Nascent Polypeptide",
+          "description": "The protein being built, one amino acid at a time (~5-20 per second), from N-terminus to C-terminus. It snakes through the exit tunnel and starts folding (here into an alpha-helix) as it emerges.",
+          "hero": true,
+          "process": "Translation (protein synthesis)",
+          "objects": [
+            "Amino Acids 1",
+            "Amino Acids 2",
+            "Amino Acids 3",
+            "Amino Acids 4",
+            "Amino Acids 5",
+            "Polypeptide Backbone"
+          ]
+        },
+        {
+          "id": "aminoacyl_trna_incoming",
+          "title": "Aminoacyl-tRNA (incoming)",
+          "group": "Incoming tRNA",
+          "description": "The next tRNA, charged with Lysine, matching codon AAA (anticodon UUU). It is delivered to the A site by elongation factor eEF1A-GTP.",
+          "hero": true,
+          "process": "Translation (protein synthesis)",
+          "objects": [
+            "Incoming tRNA (Lys)",
+            "Lysine"
+          ]
+        },
+        {
+          "id": "elongation_factor_eef1a_ef_tu",
+          "title": "Elongation Factor eEF1A (EF-Tu)",
+          "group": "Incoming tRNA",
+          "description": "A GTPase that escorts charged tRNAs to the A site. When the codon matches, GTP is hydrolysed and eEF1A releases the tRNA - a proofreading step that keeps errors to ~1 in 10,000. eEF2 (EF-G) then drives translocation.",
+          "hero": true,
+          "process": "Translation (protein synthesis)",
+          "objects": [
+            "eEF1A (Elongation Factor)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rough_er",
+      "name": "Rough Endoplasmic Reticulum",
+      "file": "rough_er.glb",
+      "size_mb": 8.9,
+      "camera": {
+        "position": [
+          5.5,
+          -21.0,
+          9.0
+        ],
+        "target": [
+          3.0,
+          0.5,
+          0.0
+        ],
+        "lens_mm": 40.0
+      },
+      "parts": [
+        {
+          "id": "rer_cisterna_membrane",
+          "title": "RER Cisterna (membrane)",
+          "group": "Membranes",
+          "description": "A flattened membrane sac of the rough ER. Its cytosolic face is studded with ribosomes; its interior (the lumen) is where new proteins fold, form disulfide bonds and receive N-linked sugar chains. Stacked sheets are linked by helical 'Terasaki ramps' like a parking garage.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "ER Cisterna 1",
+            "ER Cisterna 2",
+            "ER Cisterna 3",
+            "ER Cisterna 4"
+          ]
+        },
+        {
+          "id": "terasaki_ramps_sheet_connections",
+          "title": "Terasaki Ramps (sheet connections)",
+          "group": "Membranes",
+          "description": "Helicoidal membrane ramps that connect stacked ER sheets into one continuous membrane system and one shared lumen.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Terasaki Ramps"
+          ]
+        },
+        {
+          "id": "membrane_bound_ribosomes",
+          "title": "Membrane-bound Ribosomes",
+          "group": "Ribosomes",
+          "description": "Ribosomes docked on the ER via the Sec61 translocon. Their large (60S) subunit sits on the membrane and the small (40S) subunit faces the cytosol. The growing protein is threaded straight through the membrane into the lumen.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Membrane-bound Ribosomes"
+          ]
+        },
+        {
+          "id": "polysome_mrna_several_ribosomes",
+          "title": "Polysome (mRNA + several ribosomes)",
+          "group": "Process: Polysome",
+          "description": "One mRNA translated simultaneously by many ribosomes, which arrange in spirals/rosettes on the ER surface. Each ribosome is a separate object so translation can be animated.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Polysome Ribosome 1",
+            "Polysome Ribosome 2",
+            "Polysome Ribosome 3",
+            "Polysome Ribosome 4",
+            "Polysome Ribosome 5",
+            "Polysome Ribosome 6",
+            "Polysome Ribosome 7",
+            "Polysome Ribosome 8",
+            "Polysome Ribosome 9",
+            "Polysome mRNA"
+          ]
+        },
+        {
+          "id": "nascent_polypeptides",
+          "title": "Nascent Polypeptides",
+          "group": "Lumen Contents",
+          "description": "Newly made protein chains being pushed through the translocon into the ER lumen as the ribosome translates (co-translational translocation). Their signal peptide is clipped off by signal peptidase.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Nascent Polypeptides"
+          ]
+        },
+        {
+          "id": "er_chaperones_bip_pdi_calnexin",
+          "title": "ER Chaperones (BiP, PDI, calnexin)",
+          "group": "Lumen Contents",
+          "description": "Lumenal proteins that help new proteins fold correctly, form disulfide bonds (PDI) and check quality. Misfolded proteins are held back and eventually sent for destruction (ERAD); too many trigger the unfolded protein response.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Chaperones (BiP, calnexin)"
+          ]
+        },
+        {
+          "id": "copii_coated_transport_vesicles",
+          "title": "COPII-coated Transport Vesicles",
+          "group": "ER Exit Site",
+          "description": "At ER exit sites the COPII coat (Sar1, Sec23/24, Sec13/31 cage) bends the membrane into vesicles that carry correctly folded proteins to the Golgi (anterograde transport).",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "COPII Coat",
+            "COPII Vesicles"
+          ]
+        },
+        {
+          "id": "nuclear_envelope_continuity",
+          "title": "Nuclear Envelope (continuity)",
+          "group": "Context",
+          "description": "The outer nuclear membrane is directly continuous with the rough ER membrane, and the perinuclear space with the ER lumen - mRNA leaving nuclear pores is translated right here.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "NE-ER Junction",
+            "Nuclear Pores (context)",
+            "Outer Nuclear Membrane (continuous)"
+          ]
+        },
+        {
+          "id": "er_membrane_lipid_bilayer",
+          "title": "ER Membrane (lipid bilayer)",
+          "group": "Hero: Translocation",
+          "description": "Two phospholipid leaflets ~5 nm thick; the cytosolic leaflet faces the ribosome, the lumenal leaflet faces the ER interior.",
+          "hero": true,
+          "process": "Protein targeting: co-translational translocation into the ER",
+          "objects": [
+            "Membrane Patch (cytosolic leaflet)",
+            "Membrane Patch (lumenal leaflet)"
+          ]
+        },
+        {
+          "id": "sec61_translocon",
+          "title": "Sec61 Translocon",
+          "group": "Hero: Translocation",
+          "description": "A protein-conducting channel (Sec61 alpha/beta/gamma) in the ER membrane. The ribosome docks on it; the channel opens laterally to let hydrophobic signal sequences / transmembrane segments into the bilayer.",
+          "hero": true,
+          "process": "Protein targeting: co-translational translocation into the ER",
+          "objects": [
+            "Sec61 Translocon"
+          ]
+        },
+        {
+          "id": "ribosome_large_subunit_60s",
+          "title": "Ribosome - Large Subunit (60S)",
+          "group": "Hero: Translocation",
+          "description": "Catalyses peptide-bond formation (peptidyl transferase centre, made of rRNA). The new chain leaves through an exit tunnel that lines up with the Sec61 pore.",
+          "hero": true,
+          "process": "Protein targeting: co-translational translocation into the ER",
+          "objects": [
+            "Ribosome Large Subunit (60S)"
+          ]
+        },
+        {
+          "id": "ribosome_small_subunit_40s",
+          "title": "Ribosome - Small Subunit (40S)",
+          "group": "Hero: Translocation",
+          "description": "Binds the mRNA and decodes it: matches each codon to the anticodon of the right tRNA.",
+          "hero": true,
+          "process": "Protein targeting: co-translational translocation into the ER",
+          "objects": [
+            "Ribosome Small Subunit (40S)"
+          ]
+        },
+        {
+          "id": "mrna",
+          "title": "mRNA",
+          "group": "Hero: Translocation",
+          "description": "Messenger RNA carrying the gene's code from the nucleus; read 5'->3' by the ribosome.",
+          "hero": true,
+          "process": "Protein targeting: co-translational translocation into the ER",
+          "objects": [
+            "mRNA"
+          ]
+        },
+        {
+          "id": "nascent_polypeptide",
+          "title": "Nascent Polypeptide",
+          "group": "Hero: Translocation",
+          "description": "The growing protein chain threading through the ribosome tunnel and the Sec61 pore into the lumen, where it folds.",
+          "hero": true,
+          "process": "Protein targeting: co-translational translocation into the ER",
+          "objects": [
+            "Nascent Polypeptide"
+          ]
+        },
+        {
+          "id": "signal_peptide",
+          "title": "Signal Peptide",
+          "group": "Hero: Translocation",
+          "description": "A short hydrophobic sequence at the protein's N-terminus that marks it for the ER. Recognised by SRP, inserted into the translocon, then cut off by signal peptidase.",
+          "hero": true,
+          "process": "Protein targeting: co-translational translocation into the ER",
+          "objects": [
+            "Signal Peptide"
+          ]
+        },
+        {
+          "id": "signal_peptidase",
+          "title": "Signal Peptidase",
+          "group": "Hero: Translocation",
+          "description": "Lumenal-facing membrane enzyme that cleaves the signal peptide from the new protein.",
+          "hero": true,
+          "process": "Protein targeting: co-translational translocation into the ER",
+          "objects": [
+            "Signal Peptidase"
+          ]
+        },
+        {
+          "id": "signal_recognition_particle_srp",
+          "title": "Signal Recognition Particle (SRP)",
+          "group": "Hero: Translocation",
+          "description": "RNA-protein complex that grabs the signal peptide as it emerges from a free ribosome, pauses translation, and delivers the ribosome to the SRP receptor on the ER. Shown released after hand-off.",
+          "hero": true,
+          "process": "Protein targeting: co-translational translocation into the ER",
+          "objects": [
+            "Signal Recognition Particle (SRP)"
+          ]
+        },
+        {
+          "id": "srp_receptor",
+          "title": "SRP Receptor",
+          "group": "Hero: Translocation",
+          "description": "Membrane protein that binds SRP (GTP-dependent) and transfers the ribosome to the Sec61 translocon.",
+          "hero": true,
+          "process": "Protein targeting: co-translational translocation into the ER",
+          "objects": [
+            "SRP Receptor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "smooth_er",
+      "name": "Smooth Endoplasmic Reticulum",
+      "file": "smooth_er.glb",
+      "size_mb": 8.04,
+      "camera": {
+        "position": [
+          2.5,
+          -21.0,
+          8.0
+        ],
+        "target": [
+          1.5,
+          0.5,
+          0.0
+        ],
+        "lens_mm": 30.0
+      },
+      "parts": [
+        {
+          "id": "smooth_er_tubules",
+          "title": "Smooth ER Tubules",
+          "group": "Membranes",
+          "description": "A branching network of membrane tubules (~50 nm wide) with no ribosomes, joined at three-way junctions shaped by reticulon and atlastin proteins. Its continuous lumen is shared with the rough ER.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "SER Tubules"
+          ]
+        },
+        {
+          "id": "rough_to_smooth_er_transition",
+          "title": "Rough-to-Smooth ER Transition",
+          "group": "Context",
+          "description": "Rough ER sheets give way to smooth tubules: the same continuous membrane, but ribosome-free. Cells that make lots of lipids or detoxify drugs (liver, adrenal, muscle) have extensive smooth ER.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Ribosomes (context)",
+            "Rough ER Sheet (context)",
+            "Sheet-Tubule Junction"
+          ]
+        },
+        {
+          "id": "lipid_synthesis_enzymes",
+          "title": "Lipid-Synthesis Enzymes",
+          "group": "Enzymes & Pumps",
+          "description": "Enzymes on the cytosolic face that build phospholipids, cholesterol and ceramide from fatty-acyl-CoA and glycerol-3-phosphate. New lipids are inserted into the membrane and shuttled by flippases/scramblases and lipid-transfer proteins.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Lipid Synthesis Enzymes"
+          ]
+        },
+        {
+          "id": "cytochrome_p450_detoxification",
+          "title": "Cytochrome P450 (detoxification)",
+          "group": "Enzymes & Pumps",
+          "description": "Haem enzymes that oxidise drugs, alcohol, pesticides and steroids, making them water-soluble for excretion. Phenobarbital or alcohol use makes liver cells expand their smooth ER and P450 levels.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Cytochrome P450 Enzymes"
+          ]
+        },
+        {
+          "id": "serca_ca2_pumps",
+          "title": "SERCA Ca2+ Pumps",
+          "group": "Enzymes & Pumps",
+          "description": "ATP-driven pumps that move Ca2+ from the cytosol into the ER lumen, keeping cytosolic Ca2+ very low (~100 nM) and the store ready for signalling and muscle contraction.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "SERCA Calcium Pumps"
+          ]
+        },
+        {
+          "id": "stored_ca2_ions",
+          "title": "Stored Ca2+ Ions",
+          "group": "Lumen Contents",
+          "description": "The ER is the cell's main calcium store (~0.5 mM, thousands of times higher than the cytosol), buffered by calsequestrin/calreticulin. Released through IP3 or ryanodine receptors to trigger contraction, secretion and signalling.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Stored Calcium Ions"
+          ]
+        },
+        {
+          "id": "lipid_droplet",
+          "title": "Lipid Droplet",
+          "group": "Lipid Droplet & Glycogen",
+          "description": "Neutral fats (triglycerides, cholesterol esters) made in the ER bilayer bud off into the cytosol as droplets wrapped in a single phospholipid layer and coat proteins (perilipins); used as energy and membrane-building stores.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Lipid Droplet"
+          ]
+        },
+        {
+          "id": "glycogen_rosettes",
+          "title": "Glycogen Rosettes",
+          "group": "Lipid Droplet & Glycogen",
+          "description": "In liver cells glycogen particles sit right beside smooth ER, whose enzyme glucose-6-phosphatase releases free glucose into the blood when glycogen is broken down.",
+          "hero": false,
+          "process": "",
+          "objects": [
+            "Glycogen Granules"
+          ]
+        },
+        {
+          "id": "er_membrane_lipid_bilayer",
+          "title": "ER Membrane (lipid bilayer)",
+          "group": "Hero: Ca2+ Signalling",
+          "description": "Phospholipid bilayer: cytosol above, ER lumen below.",
+          "hero": true,
+          "process": "Calcium signalling / muscle contraction",
+          "objects": [
+            "ER Membrane Patch (cytosolic leaflet)",
+            "ER Membrane Patch (lumenal leaflet)"
+          ]
+        },
+        {
+          "id": "serca_pump",
+          "title": "SERCA Pump",
+          "group": "Hero: Ca2+ Signalling",
+          "description": "P-type ATPase: each cycle uses 1 ATP to move 2 Ca2+ ions from the cytosol into the ER lumen (reloading the store).",
+          "hero": true,
+          "process": "Calcium signalling / muscle contraction",
+          "objects": [
+            "SERCA Pump"
+          ]
+        },
+        {
+          "id": "ip3_receptor_ca2_release_channel",
+          "title": "IP3 Receptor (Ca2+ release channel)",
+          "group": "Hero: Ca2+ Signalling",
+          "description": "Tetrameric channel that opens when the second messenger IP3 (made after hormone/neurotransmitter signals) binds, releasing a burst of Ca2+ from the ER into the cytosol. Ryanodine receptors play the same role in muscle.",
+          "hero": true,
+          "process": "Calcium signalling / muscle contraction",
+          "objects": [
+            "IP3 Receptor Channel"
+          ]
+        },
+        {
+          "id": "ca2_ions",
+          "title": "Ca2+ Ions",
+          "group": "Hero: Ca2+ Signalling",
+          "description": "Calcium ions: concentrated in the lumen (below), released into the cytosol (above) through the IP3 receptor.",
+          "hero": true,
+          "process": "Calcium signalling / muscle contraction",
+          "objects": [
+            "Ca2+ Ions"
+          ]
+        },
+        {
+          "id": "ip3_inositol_trisphosphate",
+          "title": "IP3 (inositol trisphosphate)",
+          "group": "Hero: Ca2+ Signalling",
+          "description": "Small second messenger released from the plasma membrane (by phospholipase C) that diffuses to the ER and opens IP3 receptors.",
+          "hero": true,
+          "process": "Calcium signalling / muscle contraction",
+          "objects": [
+            "IP3 Messenger"
+          ]
+        }
+      ]
+    }
+  ]
+}
