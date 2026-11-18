@@ -17,7 +17,9 @@
   #cur::after { content: ''; }
   #tagT { font-size: 16px; font-weight: 650; } #tagJ { font-size: 13px; opacity: .8; margin-top: 2px; }
   #vid { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  #ui { position: fixed; inset: 0; pointer-events: none; } #ui > * { pointer-events: auto; } #ui > #title, #ui > #toast, #ui > #cur, #ui > #hint, #ui > #load { pointer-events: none; }
+  #ui { position: fixed; inset: 0; pointer-events: none; } #ui > * { pointer-events: auto; } #ui > #title, #ui > #toast, #ui > #cur, #ui > #hint, #ui > #load, #ui > #hov { pointer-events: none; }
+  #touch { position: fixed; inset: 0; touch-action: none; }
+  #hov { position: fixed; transform: translate(-50%, -100%); background: rgba(10, 18, 30, .78); color: #fff; padding: 3px 9px; border-radius: 999px; font-size: 12px; white-space: nowrap; border: 1px solid rgba(255, 255, 255, .35); }
   #hint { position: fixed; left: 50%; top: 45%; transform: translate(-50%, -50%); background: rgba(10, 18, 30, .75); padding: 10px 14px; border-radius: 14px; font-size: 14px; text-align: center; max-width: calc(100vw - 64px); }
   #bar { display: flex; gap: 8px; width: max-content; max-width: calc(100vw - 24px); flex-wrap: wrap; justify-content: center; }
   #bar button.soft, #bExit { background: rgba(10, 18, 30, .7) !important; color: #eaf3ff !important; }
@@ -39,6 +41,8 @@
 <video id="vid" class="hide" playsinline muted autoplay></video>
 <canvas id="gl"></canvas>
 <div id="ui">
+<div id="touch" class="hide"></div>
+<div id="hov" class="hide"></div>
 <div id="title">Animal cell</div>
 <div id="hint" class="hide"></div>
 <div id="load">Loading the cell…</div>
@@ -49,6 +53,6 @@
 <div id="bar"><button id="bBack" class="hide soft">‹ Whole cell</button><button id="bAR">See it in my room</button><button id="bExit" class="hide">Exit</button></div>
 </div>
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/" } }</script>
-<script type="module" src="./app.js?v=6"></script>
+<script type="module" src="./app.js?v=8"></script>
 </body>
 </html>
