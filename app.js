@@ -270,9 +270,13 @@ $('bAR').onclick = async () => {
   const xrOK = navigator.xr && await Promise.race([navigator.xr.isSessionSupported('immersive-ar').catch(() => false), new Promise(r => setTimeout(() => r(false), 2000))]);
   return xrOK ? startXR() : startGyro();
 };
+// Camera view = the iPhone way (back camera + motion sensor), on any phone. On iPhone the room button already does this.
+const IOS = /iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+$('bCamV').onclick = () => startGyro();
+if (IOS) show('bCamV', false);
 $('bExit').onclick = () => mode === 'xr' ? renderer.xr.getSession()?.end() : stopGyro();
 function uiAR(on) {
-  show('bAR', !on); show('bExit', on); show('title', !on); show('touch', on); document.body.classList.toggle('ar', on); setHover(null); TG.vx = TG.vy = 0;
+  show('bAR', !on); show('bCamV', !on && !IOS); show('bExit', on); show('title', !on); show('touch', on); document.body.classList.toggle('ar', on); setHover(null); TG.vx = TG.vy = 0;
   controls.enabled = !on; select(null);
 }
 
@@ -361,7 +365,9 @@ const onOri = e => { if (e.alpha != null) ori = e; };
 const qFix = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), -Math.PI / 2), qT = new THREE.Quaternion(), qX = new THREE.Quaternion(-Math.SQRT1_2, 0, 0, Math.SQRT1_2), qS = new THREE.Quaternion(), eul = new THREE.Euler();
 async function startGyro() {
   try {
-    if (typeof DeviceOrientationEvent !== 'undefined' && DeviceOrientationEvent.requestPermission && await DeviceOrientationEvent.requestPermission() !== 'granted') return toast('Motion access is needed so the cell can stay in place.');
+    let motion = true;                                                    // without motion the cell still shows, it just stays in front of you
+    try { if (typeof DeviceOrientationEvent !== 'undefined' && DeviceOrientationEvent.requestPermission) motion = await DeviceOrientationEvent.requestPermission() === 'granted'; } catch (e) { motion = false; }
+    if (!motion) toast('Motion access is off: the cell stays in front of you. Allow Motion & Orientation to look around it.');
     await H.start('environment');
   } catch (e) { console.warn(e); return toast('Could not open the camera. Allow camera access and try again.'); }
   addEventListener('deviceorientation', onOri);
